@@ -45,13 +45,28 @@ titles[0].style.color = "green";
 //selecting the list items
 const items = document.getElementsByClassName("list-group-item");
 // console.log(items);
+// items[1].textContent = "hello2";
+// for (var i = 0; i < items.length; i++) {
+//   items[i].style.backgroundColor = "#f4f4f4";
+// }
+// items[1].style.backgroundColor = "yellow";
 
 //third element green background color
-items[2].style.backgroundColor = "green";
+// items[2].style.backgroundColor = "green";
 
 //changing all items text bold
 for (var i = 0; i < items.length; i++) {
   items[i].style.fontWeight = "bold";
 }
 
-//done
+//getelementbytagename
+const liTag = document.getElementsByTagName("li");
+// const liCls = document.getElementsByClassName("list-group-item");  //not working again
+
+for (var i = 0; i < liTag.length; i++) {
+  liTag[i].style.backgroundColor = "#f5f";
+}
+
+for (var i = 0; i < items.length; i++) {
+  items[i].style.backgroundColor = "#f4f4f4";
+}
