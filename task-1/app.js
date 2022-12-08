@@ -32,7 +32,24 @@ var headerTitle = document.getElementById("header-title");
 
 document.getElementById("main-header").style.borderBottom = "solid 3px black";
 
-const items = document.getElementsByClassName("title"); //gives html collection
+const titles = document.getElementsByClassName("title"); //gives html collection
 
-items[0].style.fontWeight = "bold";
-items[0].style.color = "green";
+console.log();
+
+titles[0].style.fontWeight = "bold";
+titles[0].style.color = "green";
+
+// titles[1].style.backgroundColor = "yellow";
+// titles[1].textContent = "hello";
+
+//selecting the list items
+const items = document.getElementsByClassName("list-group-item");
+// console.log(items);
+
+//third element green background color
+items[2].style.backgroundColor = "green";
+
+//changing all items text bold
+for (var i = 0; i < items.length; i++) {
+  items[i].style.fontWeight = "bold";
+}
