@@ -70,3 +70,30 @@ for (var i = 0; i < liTag.length; i++) {
 for (var i = 0; i < items.length; i++) {
   items[i].style.backgroundColor = "#f4f4f4";
 }
+
+//queryselector assignment
+
+const secondItem = document.querySelector(".list-group-item:nth-child(2)");
+// secondItem.style.backgroundColor = "green";
+const thirdItem = document.querySelector(".list-group-item:nth-child(3)");
+// thirdItem.style.opacity = "0";
+
+//queryselectorAll assignment
+const qAll = document.querySelectorAll(".list-group-item");
+qAll[1].style.color = "green";
+
+//choosing all odd elements
+const qallOdd = document.querySelectorAll(".list-group-item:nth-child(odd)");
+
+for (let i = 0; i < qallOdd.length; i++)
+  qallOdd[i].style.backgroundColor = "green";
+
+/*c
+difference between queryselector and queryselectorAll :
+
+querySelector selects any first occurrence of classes, tags etc. if there are multiple elements with same classes then it will select only first one.
+
+queryselectorAll selects all the occurence of given class or tag. it will return a nodelist which is like  a array but not exctly array.  we can index it and also we can use array method on it.
+
+also when we change anything on nodelist we offen use indexing or loop.
+*/
