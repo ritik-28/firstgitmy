@@ -96,4 +96,93 @@ querySelector selects any first occurrence of classes, tags etc. if there are mu
 queryselectorAll selects all the occurence of given class or tag. it will return a nodelist which is like  a array but not exctly array.  we can index it and also we can use array method on it.
 
 also when we change anything on nodelist we offen use indexing or loop.
+
+
+//parentNode
+
+var itemList = document.querySelector("#items");
+// console.log(itemList);
+// console.log(itemList.parentNode);
+// console.log(itemList.parentNode.parentNode);
+
+// itemList.parentNode.style.backgroundColor = "#f4f4f4";
+// itemList.parentNode.parentNode.style.backgroundColor = "red";
+
+//parentElement
+// console.log(itemList);
+// console.log(itemList.parentElement);
+// console.log(itemList.parentElement.parentElement);
+
+itemList.parentElement.style.backgroundColor = "#f4f4f4";
+
+//childNodes
+console.log(itemList.childNodes);
+console.log(itemList.childNodes[1]);
+// itemList.childNodes[1].style.backgroundColor = "orange";
+
+//children
+console.log(itemList.children);
+console.log(itemList.children[1]);
+// itemList.children[1].style.backgroundColor = "red";
+
+//firstChild
+console.log(itemList.firstChild);
+
+//firstElementChild
+console.log(itemList.firstElementChild);
+
+//lastChild
+console.log(itemList.lastChild);
+
+//lastElementChild
+console.log(itemList.lastElementChild);
+
+//nextSiblings
+console.log(itemList.nextSibling);
+
+//nextElementSibling
+console.log(itemList.nextElementSibling);
+console.log(document.querySelector(".title").nextElementSibling);
+
+//priviousSibling
+console.log(itemList.previousSibling.previousSibling);
+
+//priviousElemenSibling
+console.log(itemList.previousElementSibling);
+
 */
+
+//createElement
+
+//crreating a div
+var newDiv = document.createElement("div");
+
+//adding class to this element
+newDiv.className = "hello";
+
+//adding id to this element
+newDiv.id = "hello1";
+
+//set attribute to this element
+newDiv.setAttribute("title", "hello div");
+// console.log(newDiv);
+
+//create text node
+var newDivText = document.createTextNode("HEllo world");
+
+//APPEND this text node to newDiv
+newDiv.append(newDivText);
+
+//we have made an element with all the things using javascript, now insert it in dom
+//now INSERT it into the DOM
+var container = document.querySelector("header .container");
+var h1 = document.querySelector("header h1");
+
+//add HEllo word before Item Lister
+container.insertBefore(newDiv, h1);
+newDiv.style.fontSize = "30px";
+
+//add HEllo word before Item 1
+var item1 = document.querySelector(".list-group-item");
+var ulItem = document.querySelector(".list-group");
+ulItem.insertBefore(newDiv, item1);
