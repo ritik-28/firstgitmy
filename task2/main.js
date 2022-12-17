@@ -69,3 +69,32 @@ editButton.appendChild(document.createTextNode("Edit"));
 itemList.children[0].appendChild(editButton);
 itemList.children[1].appendChild(editButton);
 itemList.children[2].appendChild(editButton);
+
+//filer
+
+var filter = document.getElementById("filter");
+
+//filter event
+filter.addEventListener("keyup", filterItems);
+
+//filterItems
+
+function filterItems(e) {
+  // console.log(e.target.value);
+  //convert text to lwer case
+  var text = e.target.value.toLowerCase();
+
+  //get lis
+  var items = itemList.getElementsByTagName("li");
+
+  //convert in an array
+  Array.from(items).forEach(function (item) {
+    var itemName = item.firstChild.textContent;
+    // console.log(itemName);
+    if (itemName.toLowerCase().indexOf(text) != -1) {
+      item.style.display = "block";
+    } else {
+      item.style.display = "none";
+    }
+  });
+}
