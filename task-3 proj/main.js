@@ -372,8 +372,21 @@ function onSubmit(e) {
     userList.appendChild(li);
 
     //storing it in local st0rage
-    localStorage.setItem("userName", nameInput.value);
-    localStorage.setItem("email", emailInput.value);
+
+    // localStorage.setItem("userName", nameInput.value);
+    // localStorage.setItem("email", emailInput.value);
+
+    //making 0bject using dynamic form data
+    let detailObject = {
+      name: `${nameInput.value}`,
+      userEmail: `${emailInput.value}`,
+    };
+
+    let myObjserial = JSON.stringify(detailObject);
+    // console.log(myObjserial);
+
+    //storing it in local st0rage as an 0bject
+    localStorage.setItem("myobj", myObjserial);
 
     // Clear fields
     nameInput.value = "";
