@@ -339,6 +339,7 @@
 // Put DOM elements into variables
 const myForm = document.querySelector("#my-form");
 const nameInput = document.querySelector("#name");
+//event.target.uName
 const emailInput = document.querySelector("#email");
 const msg = document.querySelector(".msg");
 const userList = document.querySelector("#users");
@@ -362,7 +363,9 @@ function onSubmit(e) {
 
     // Add text node with input values
     li.appendChild(
-      document.createTextNode(`${nameInput.value}: ${emailInput.value}`)
+      document.createTextNode(
+        `${nameInput.value}: ${emailInput.value} : ${phone.value}`
+      )
     );
 
     // Add HTML
@@ -386,10 +389,11 @@ function onSubmit(e) {
     // console.log(myObjserial);
 
     //storing it in local st0rage as an 0bject
-    localStorage.setItem("myobj", myObjserial);
+    localStorage.setItem(`${emailInput.value}`, myObjserial);
 
     // Clear fields
     nameInput.value = "";
     emailInput.value = "";
+    phone.value = "";
   }
 }
