@@ -340,6 +340,7 @@
 const myForm = document.querySelector("#my-form");
 const nameInput = document.querySelector("#name");
 //event.target.uName
+const phoneInput = document.querySelector("#phone");
 const emailInput = document.querySelector("#email");
 const msg = document.querySelector(".msg");
 const userList = document.querySelector("#users");
@@ -370,10 +371,12 @@ function onSubmit(e) {
 
     //making button element  >>> from outer function
     const buttonEl = deleteButton();
+    const editbutton = editButton();
     // console.log(buttonEl);
 
     //apending on li element
     li.appendChild(buttonEl);
+    li.appendChild(editbutton);
 
     // Add HTML
     // li.innerHTML = `<strong>${nameInput.value}</strong>e: ${emailInput.value}`;
@@ -390,6 +393,7 @@ function onSubmit(e) {
     let detailObject = {
       name: `${nameInput.value}`,
       userEmail: `${emailInput.value}`,
+      userPhone: `${phoneInput.value}`,
     };
 
     let myObjserial = JSON.stringify(detailObject);
@@ -409,8 +413,15 @@ function onSubmit(e) {
     buttonEl.addEventListener("click", function (e) {
       // console.log(e.target.parentNode);
       // localStorage.removeItem(`${emailInput.value}`);
-      let deleteKey = `${emailInput.value}`;
-      localStorage.removeItem(deleteKey);
+      localStorage.removeItem(detailObject.userEmail);
+      e.target.parentNode.remove();
+    });
+    editbutton.addEventListener("click", function (e) {
+      e.preventDefault();
+      nameInput.value = `${detailObject.name}`;
+      emailInput.value = `${detailObject.userEmail}`;
+      phoneInput.value = `${detailObject.userPhone}`;
+      localStorage.removeItem(detailObject.userEmail);
       e.target.parentNode.remove();
     });
   }
@@ -423,5 +434,15 @@ const deleteButton = function () {
   buttonEl.id = "btn2";
   buttonEl.setAttribute("value", "btndelete");
   buttonEl.appendChild(document.createTextNode("Delete"));
+  return buttonEl;
+};
+
+//making edit button
+const editButton = function () {
+  const buttonEl = document.createElement("button");
+  buttonEl.className = "btn-1";
+  buttonEl.id = "btn3";
+  buttonEl.setAttribute("value", "btnEdit");
+  buttonEl.appendChild(document.createTextNode("Edit"));
   return buttonEl;
 };
