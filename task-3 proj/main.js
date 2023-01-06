@@ -368,6 +368,13 @@ function onSubmit(e) {
       )
     );
 
+    //making button element  >>> from outer function
+    const buttonEl = deleteButton();
+    // console.log(buttonEl);
+
+    //apending on li element
+    li.appendChild(buttonEl);
+
     // Add HTML
     // li.innerHTML = `<strong>${nameInput.value}</strong>e: ${emailInput.value}`;
 
@@ -389,11 +396,32 @@ function onSubmit(e) {
     // console.log(myObjserial);
 
     //storing it in local st0rage as an 0bject
+
+    // localStorage.setItem("myobj", myObjserial);
     localStorage.setItem(`${emailInput.value}`, myObjserial);
 
     // Clear fields
     nameInput.value = "";
     emailInput.value = "";
     phone.value = "";
+
+    //adding An event in the delete button
+    buttonEl.addEventListener("click", function (e) {
+      // console.log(e.target.parentNode);
+      // localStorage.removeItem(`${emailInput.value}`);
+      let deleteKey = `${emailInput.value}`;
+      localStorage.removeItem(deleteKey);
+      e.target.parentNode.remove();
+    });
   }
 }
+
+//outer function for handling deletebutton
+const deleteButton = function () {
+  const buttonEl = document.createElement("button");
+  buttonEl.className = "btn-1";
+  buttonEl.id = "btn2";
+  buttonEl.setAttribute("value", "btndelete");
+  buttonEl.appendChild(document.createTextNode("Delete"));
+  return buttonEl;
+};
