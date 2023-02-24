@@ -413,6 +413,7 @@ function onSubmit(e) {
       )
       .then((response) => {
         // console.log(response);
+        //we are adding when api call and data writing is done
         userList.appendChild(li);
       })
       .catch((err) => console.log(err));
