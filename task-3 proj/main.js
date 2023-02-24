@@ -379,7 +379,7 @@ function onSubmit(e) {
     li.appendChild(editbutton);
 
     // Add HTML
-    // li.innerHTML = `<strong>${nameInput.value}</strong>e: ${emailInput.value}`;
+    // li.innerHTML = `<strong>${nameInput.value}</strong>: ${emailInput.value}`;
 
     // Append to ul
     userList.appendChild(li);
@@ -402,7 +402,18 @@ function onSubmit(e) {
     //storing it in local st0rage as an 0bject
 
     // localStorage.setItem("myobj", myObjserial);
-    localStorage.setItem(`${emailInput.value}`, myObjserial);
+    // localStorage.setItem(`${emailInput.value}`, myObjserial);
+
+    //doing post request from crudcrud backend using axios instead of localstorage......not using stringify object myObjectserial because axios do that thing by default
+    axios
+      .post(
+        "https://crudcrud.com/api/6d0d15cdcf9a4dd3b7e1cb9c8d10802b/appointmentData",
+        detailObject
+      )
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => console.log(err));
 
     // Clear fields
     nameInput.value = "";
