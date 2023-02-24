@@ -408,7 +408,7 @@ function onSubmit(e) {
 
     axios
       .post(
-        "https://crudcrud.com/api/6d0d15cdcf9a4dd3b7e1cb9c8d10802b/appointmentData",
+        "https://crudcrud.com/api/b7f5a0aedd0147f58d2b475deebc3d12/appointmentData",
         detailObject
       )
       .then((response) => {
@@ -464,7 +464,7 @@ const editButton = function () {
 window.addEventListener("DOMContentLoaded", () => {
   axios
     .get(
-      "https://crudcrud.com/api/6d0d15cdcf9a4dd3b7e1cb9c8d10802b/appointmentData"
+      "https://crudcrud.com/api/b7f5a0aedd0147f58d2b475deebc3d12/appointmentData"
     )
     .then((response) => {
       // console.log(response);
@@ -488,12 +488,57 @@ window.addEventListener("DOMContentLoaded", () => {
           e.target.parentNode.remove();
           axios
             .delete(
-              `https://crudcrud.com/api/6d0d15cdcf9a4dd3b7e1cb9c8d10802b/appointmentData/${response.data[i]._id}`
+              `https://crudcrud.com/api/b7f5a0aedd0147f58d2b475deebc3d12/appointmentData/${response.data[i]._id}`
             )
             .then((del) => console.log(del))
             .catch((err) => console.log(err));
+        });
+
+        editbutton.addEventListener("click", (e) => {
+          e.preventDefault();
+          nameInput.value = `${response.data[i].name}`;
+          emailInput.value = `${response.data[i].userEmail}`;
+          phoneInput.value = `${response.data[i].userPhone}`;
+          e.target.parentNode.remove();
+
+          let detailObject = {
+            name: `${nameInput.value}`,
+            userEmail: `${emailInput.value}`,
+            userPhone: `${phoneInput.value}`,
+          };
+
+          axios
+            .delete(
+              `https://crudcrud.com/api/b7f5a0aedd0147f58d2b475deebc3d12/appointmentData/${response.data[i]._id}`
+            )
+            .then((res) => console.log(res))
+            .catch((err) => console.log(err));
+
+          axios
+            .put(
+              `https://crudcrud.com/api/b7f5a0aedd0147f58d2b475deebc3d12/appointmentData/${response.data[i]._id}`,
+              detailObject
+            )
+            .then((res) => {
+              console.log(res);
+            })
+            .catch((err) => console.log(err));
+
+          // axios
+          //   .post(
+          //     "https://crudcrud.com/api/b7f5a0aedd0147f58d2b475deebc3d12/appointmentData",
+          //     detailObject
+          //   )
+          //   .then((response) => {
+          //     console.log(response);
+          //   });
         });
       }
     })
     .catch((err) => console.log(err));
 });
+
+//when we exhaust crudcrud api calls then just delete cokkies and deleted storage data
+//then again get new crud crud
+//then just again make collection and add new request which should be post with some json data and paste new url/route
+//now send, so resources created and you got new crudcrud
