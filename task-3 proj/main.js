@@ -497,3 +497,8 @@ window.addEventListener("DOMContentLoaded", () => {
     })
     .catch((err) => console.log(err));
 });
+
+//when we exhaust crudcrud api calls then just delete cokkies and deleted storage data
+//then again get new crud crud
+//then just again make collection and add new request which should be post with some json data and paste new url/route
+//now send, so resources created and you got new crudcrud
