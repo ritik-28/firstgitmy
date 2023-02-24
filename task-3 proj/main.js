@@ -408,7 +408,7 @@ function onSubmit(e) {
 
     axios
       .post(
-        "https://crudcrud.com/api/6d0d15cdcf9a4dd3b7e1cb9c8d10802b/appointmentData",
+        "https://crudcrud.com/api/b7f5a0aedd0147f58d2b475deebc3d12/appointmentData",
         detailObject
       )
       .then((response) => {
@@ -464,7 +464,7 @@ const editButton = function () {
 window.addEventListener("DOMContentLoaded", () => {
   axios
     .get(
-      "https://crudcrud.com/api/6d0d15cdcf9a4dd3b7e1cb9c8d10802b/appointmentData"
+      "https://crudcrud.com/api/b7f5a0aedd0147f58d2b475deebc3d12/appointmentData"
     )
     .then((response) => {
       // console.log(response);
@@ -488,7 +488,7 @@ window.addEventListener("DOMContentLoaded", () => {
           e.target.parentNode.remove();
           axios
             .delete(
-              `https://crudcrud.com/api/6d0d15cdcf9a4dd3b7e1cb9c8d10802b/appointmentData/${response.data[i]._id}`
+              `https://crudcrud.com/api/b7f5a0aedd0147f58d2b475deebc3d12/appointmentData/${response.data[i]._id}`
             )
             .then((del) => console.log(del))
             .catch((err) => console.log(err));
