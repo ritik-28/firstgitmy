@@ -493,6 +493,46 @@ window.addEventListener("DOMContentLoaded", () => {
             .then((del) => console.log(del))
             .catch((err) => console.log(err));
         });
+
+        editbutton.addEventListener("click", (e) => {
+          e.preventDefault();
+          nameInput.value = `${response.data[i].name}`;
+          emailInput.value = `${response.data[i].userEmail}`;
+          phoneInput.value = `${response.data[i].userPhone}`;
+          e.target.parentNode.remove();
+
+          let detailObject = {
+            name: `${nameInput.value}`,
+            userEmail: `${emailInput.value}`,
+            userPhone: `${phoneInput.value}`,
+          };
+
+          axios
+            .delete(
+              `https://crudcrud.com/api/b7f5a0aedd0147f58d2b475deebc3d12/appointmentData/${response.data[i]._id}`
+            )
+            .then((res) => console.log(res))
+            .catch((err) => console.log(err));
+
+          axios
+            .put(
+              `https://crudcrud.com/api/b7f5a0aedd0147f58d2b475deebc3d12/appointmentData/${response.data[i]._id}`,
+              detailObject
+            )
+            .then((res) => {
+              console.log(res);
+            })
+            .catch((err) => console.log(err));
+
+          // axios
+          //   .post(
+          //     "https://crudcrud.com/api/b7f5a0aedd0147f58d2b475deebc3d12/appointmentData",
+          //     detailObject
+          //   )
+          //   .then((response) => {
+          //     console.log(response);
+          //   });
+        });
       }
     })
     .catch((err) => console.log(err));
