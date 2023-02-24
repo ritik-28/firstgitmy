@@ -345,7 +345,7 @@ const emailInput = document.querySelector("#email");
 const msg = document.querySelector(".msg");
 const userList = document.querySelector("#users");
 
-// // Listen for form submit kkkkkjkjjjj
+// // Listen for form submit
 myForm.addEventListener("submit", onSubmit);
 
 function onSubmit(e) {
@@ -426,7 +426,6 @@ function onSubmit(e) {
     //adding An event in the delete button
     buttonEl.addEventListener("click", function (e) {
       // console.log(e.target.parentNode);
-      // localStorage.removeItem(`${emailInput.value}`);
       localStorage.removeItem(detailObject.userEmail);
       e.target.parentNode.remove();
     });
@@ -484,6 +483,16 @@ window.addEventListener("DOMContentLoaded", () => {
         li.appendChild(editbutton);
 
         userList.appendChild(li);
+
+        buttonEl.addEventListener("click", (e) => {
+          e.target.parentNode.remove();
+          axios
+            .delete(
+              `https://crudcrud.com/api/6d0d15cdcf9a4dd3b7e1cb9c8d10802b/appointmentData/${response.data[i]._id}`
+            )
+            .then((del) => console.log(del))
+            .catch((err) => console.log(err));
+        });
       }
     })
     .catch((err) => console.log(err));
