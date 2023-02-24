@@ -460,3 +460,31 @@ const editButton = function () {
   buttonEl.appendChild(document.createTextNode("Edit"));
   return buttonEl;
 };
+
+//
+window.addEventListener("DOMContentLoaded", () => {
+  axios
+    .get(
+      "https://crudcrud.com/api/6d0d15cdcf9a4dd3b7e1cb9c8d10802b/appointmentData"
+    )
+    .then((response) => {
+      // console.log(response);
+      for (let i = 0; i < response.data.length; i++) {
+        const li = document.createElement("li");
+        // Add text node with input values
+        li.appendChild(
+          document.createTextNode(
+            `${response.data[i].name}: ${response.data[i].userEmail} : ${response.data[i].userPhone}`
+          )
+        );
+        const buttonEl = deleteButton();
+        const editbutton = editButton();
+
+        li.appendChild(buttonEl);
+        li.appendChild(editbutton);
+
+        userList.appendChild(li);
+      }
+    })
+    .catch((err) => console.log(err));
+});
