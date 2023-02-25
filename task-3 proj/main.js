@@ -514,16 +514,6 @@ window.addEventListener("DOMContentLoaded", () => {
             .then((res) => console.log(res))
             .catch((err) => console.log(err));
 
-          axios
-            .put(
-              `https://crudcrud.com/api/b7f5a0aedd0147f58d2b475deebc3d12/appointmentData/${response.data[i]._id}`,
-              detailObject
-            )
-            .then((res) => {
-              console.log(res);
-            })
-            .catch((err) => console.log(err));
-
           // axios
           //   .post(
           //     "https://crudcrud.com/api/b7f5a0aedd0147f58d2b475deebc3d12/appointmentData",
