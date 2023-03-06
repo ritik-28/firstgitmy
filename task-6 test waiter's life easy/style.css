@@ -1,3 +1,8 @@
+body {
+  background-image: url("pngtree-tea-restaurant-menu-background-material-image_159445.jpg");
+}
+
+/* 
 const table1 = document.querySelector(".heading1");
 const table2 = document.querySelector(".heading2");
 const table3 = document.querySelector(".heading3");
@@ -16,61 +21,64 @@ addToBill.addEventListener("click", async function (e) {
     dish: `${dish.value}`,
     tableChoose: `${tableChoose.value}`,
   };
+
+  //adding new order
   try {
-    //adding new order
-    const response = await axios.post(
-      "https://crudcrud.com/api/5bcc0f0ec2724de98fa0b2e4988b4596/orders",
+    const response = axios.post(
+      "https://crudcrud.com/api/5599281944dd46548b5aa34b764a9117/orders",
       objectForNetwork
     );
-    orderCreate(price, tableChoose, dish, response);
+
+    var idofEL = response;
+
+    const newText = `${price.value}-${tableChoose.value}-${dish.value}`;
+    let li = document.createElement("li");
+
+    li.appendChild(document.createTextNode(newText));
+    li.style.fontWeight = "normal";
+    const deleteOrder = document.createElement("button");
+    deleteOrder.className = "btn bg-danger mx-2 my-2 delAdd ";
+    deleteOrder.style.color = "white";
+    deleteOrder.appendChild(document.createTextNode("Delete Order"));
+    li.appendChild(deleteOrder);
+
+    if (tableChoose.value === "table1") {
+      table1.appendChild(li);
+    } else if (tableChoose.value === "table2") {
+      table2.appendChild(li);
+    } else if (tableChoose.value === "table3") {
+      table3.appendChild(li);
+    }
+
+    price.value = "";
+    dish.value = "";
+
+    deleteOrder.addEventListener("click", (e) => {
+      e.target.parentNode.parentNode.removeChild(li);
+      deleteOrdertable(idofEL.data._id);
+    });
   } catch (err) {
     console.log(err);
   }
 });
 
-const orderCreate = function (price, tableChoose, dish, response) {
-  const newText = `${price.value}-${tableChoose.value}-${dish.value}`;
-  let li = document.createElement("li");
+const orderCreate = function () {};
 
-  li.appendChild(document.createTextNode(newText));
-  li.style.fontWeight = "normal";
-  const deleteOrder = document.createElement("button");
-  deleteOrder.className = "btn bg-danger mx-2 my-2 delAdd ";
-  deleteOrder.style.color = "white";
-  deleteOrder.appendChild(document.createTextNode("Delete Order"));
-  li.appendChild(deleteOrder);
-
-  if (tableChoose.value === "table1") {
-    table1.appendChild(li);
-  } else if (tableChoose.value === "table2") {
-    table2.appendChild(li);
-  } else if (tableChoose.value === "table3") {
-    table3.appendChild(li);
-  }
-  price.value = "";
-  dish.value = "";
-  deleteOrder.addEventListener("click", (e) => {
-    e.target.parentNode.parentNode.removeChild(li);
-    deleteOrdertable(response.data._id);
-  });
-};
-
-//deleting the order from backend using id
 const deleteOrdertable = async function deleteOrder(_id) {
   try {
     await axios.delete(
-      `https://crudcrud.com/api/5bcc0f0ec2724de98fa0b2e4988b4596/orders/${_id}`
+      `https://crudcrud.com/api/5599281944dd46548b5aa34b764a9117/orders/${_id}`
     );
   } catch (err) {
     console.log(err);
   }
 };
 
-//on page loads
-window.addEventListener("DOMContentLoaded", async function (e) {
+//on page loads */
+/* window.addEventListener("DOMContentLoaded", async function (e) {
   try {
     const response = await axios.get(
-      "https://crudcrud.com/api/5bcc0f0ec2724de98fa0b2e4988b4596/orders"
+      "https://crudcrud.com/api/5599281944dd46548b5aa34b764a9117/orders"
     );
 
     for (let i = 0; i < response.data.length; i++) {
@@ -101,7 +109,7 @@ window.addEventListener("DOMContentLoaded", async function (e) {
   } catch (err) {
     console.log(err);
   }
-});
+}); */
 
 ///////////////////////////////////////////////////////////////////////
 
