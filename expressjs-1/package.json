@@ -1,0 +1,27 @@
+{
+  "name": "expressjs-1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js",
+    "start-server": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ritik-28/expressjs-1.git"
+  },
+  "author": "ritik tiwari",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ritik-28/expressjs-1/issues"
+  },
+  "homepage": "https://github.com/ritik-28/expressjs-1#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.21"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
