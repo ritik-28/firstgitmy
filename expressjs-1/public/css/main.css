@@ -1,0 +1,37 @@
+header {
+  width: 100%;
+  height: 3.5rem;
+  background-color: rgba(36, 125, 139, 0.6);
+}
+body {
+  padding: 0;
+  margin: 0;
+  font-family: sans-serif;
+}
+.main-header_item_list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+.main-header_item {
+  margin: 1rem;
+  padding: 0;
+}
+
+.main-header__nav {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.main-header_item a {
+  text-decoration: none;
+  color: black;
+}
+
+.main-header_item a:hover,
+.main-header_item a:active,
+.main-header_item a.active {
+  color: #3e00a1;
+}
