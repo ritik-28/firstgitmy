@@ -10,7 +10,15 @@ const shopRoutes = require("./routes/shop");
 
 app.use(bodyParser.urlencoded());
 
+app.use(express.static(path.join(__dirname, "public")));
+
 app.use("/admin", adminRoutes);
+app.use("/contactus", (req, res, next) => {
+  res.sendFile(path.join(__dirname, "views", "contactus.html"));
+});
+app.use("/success", (req, res, next) => {
+  res.sendFile(path.join(__dirname, "views", "success.html"));
+});
 app.use(shopRoutes);
 
 app.use((req, res, next) => {

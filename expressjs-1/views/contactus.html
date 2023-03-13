@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Document</title>
+
+    <link rel="stylesheet" href="/css/contactus.css" />
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+
+  <body>
+    <header class="main-header">
+      <nav class="main-header__nav">
+        <ul class="main-header_item_list">
+          <li class="main-header_item"><a href="/">Shop</a></li>
+          <li class="main-header_item">
+            <a href="/admin/add-product">Add Product</a>
+          </li>
+          <li class="main-header_item"><a href="/contactus">Contact Us</a></li>
+        </ul>
+      </nav>
+    </header>
+    <div id="divide">
+      <h3 id="head1">Book a call</h3>
+
+      <h6 id="head2">
+        Book a call slot and our representive will call you within 1hr of
+        selected time
+      </h6>
+
+      <hr />
+
+      <form action="/success" class="form1" method="post">
+        <label for="name" class="align">Name:</label><br />
+
+        <input type="text" id="name" name="name" /><br />
+
+        <label for="Email" class="align">Email:</label><br />
+
+        <input type="email" id="Email" name="email" /><br />
+
+        <label for="phone" class="align">Phone:</label><br />
+
+        <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" /><br />
+
+        <label for="call">Time for Call:</label><br />
+
+        <div class="div2">
+          <input type="date" id="call1" />
+
+          <input type="time" id="call2" /><br />
+        </div>
+
+        <button
+          style="
+            background-color: orangered;
+
+            color: whitesmoke;
+
+            border-radius: 4px;
+
+            width: 100%;
+
+            margin: 3px 2px;
+          "
+        >
+          GET A CALL
+        </button>
+      </form>
+    </div>
+  </body>
+</html>
