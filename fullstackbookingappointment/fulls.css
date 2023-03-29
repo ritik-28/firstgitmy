@@ -1,0 +1,81 @@
+body {
+  /* background-image: url("img/contact-banner-img.png"); */
+
+  background-image: url("contact-banner-img.png");
+
+  background-repeat: no-repeat;
+
+  background-size: cover;
+}
+
+label {
+  display: inline;
+
+  font-size: 13px;
+
+  text-align: left;
+}
+
+#head1 {
+  color: orangered;
+
+  text-align: center;
+}
+
+#head2 {
+  text-align: center;
+}
+
+#divide {
+  border-style: solid;
+
+  border-width: 2px;
+
+  border-color: orangered;
+
+  border-radius: 5px;
+
+  width: 500px;
+
+  margin-left: auto;
+
+  margin-right: auto;
+
+  background-color: rgb(240, 229, 229);
+
+  padding-right: 13px;
+}
+
+#call {
+  margin-top: 10px;
+
+  margin-bottom: 2px;
+
+  margin-left: 2px;
+
+  margin-right: 2px;
+
+  width: 100%;
+
+  border: none;
+}
+
+#name,
+#Email,
+#phone {
+  width: 100%;
+
+  margin-right: 5px;
+
+  margin-left: 3px;
+}
+
+.div2 {
+  width: 100%;
+}
+
+.call1 {
+  display: none;
+
+  width: 50%;
+}
