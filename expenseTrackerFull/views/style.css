@@ -1,0 +1,54 @@
+body {
+  background-color: rgb(205, 222, 238);
+}
+.container {
+  margin-top: 50px;
+  margin-left: 350px;
+}
+.form-div {
+  background-color: rgba(38, 189, 126, 0.763);
+  border-radius: 20px;
+}
+.form-group {
+  margin-top: 10px;
+}
+.row {
+  margin-bottom: 0px;
+}
+.alert {
+  margin-bottom: 0px;
+}
+.btn {
+  margin-top: 15px;
+}
+.list-group {
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+.btnly {
+  float: right;
+}
+.btnln {
+  float: right;
+}
+.list-group button {
+  margin-top: 0;
+  margin-right: 2px;
+}
+.hidden {
+  display: none;
+}
+
+/* const listmake = ` <li class="list-group-item">
+${todoObj.todoname}   ${todoObj.descritption}
+<button type="button" class="btn btn-danger btn-sm btnln">
+ &#10006
+</button>
+<button type="button" class="btn btn-primary btn-sm btnly">
+&#10003
+</button>
+</li>`;
+listodo.insertAdjacentHTML("beforeend", listmake);
+.addEventListener("click", () => {
+  listodo.remove(listmake);
+}); */
