@@ -33,25 +33,53 @@ app.post("/signup", async (req, res, next) => {
         email,
         password,
       });
-      res.status(201).json(`succesfully created new user`);
+      return res.status(201).json(`succesfully created new user`);
     }
   } catch (err) {
     res.status(403).json({ err: err });
   }
 });
 
-app.post("/login", (req, res, next) => {
-  // res.json("hell again");
-  res.status(403).json("login api hit");
+app.post("/login", async (req, res, next) => {
+  try {
+    const { email, password } = req.body;
+
+    if (isStrValidator(email) || isStrValidator(password)) {
+      return res.status(400).json({ err: "fill all feilds" });
+    }
+
+    const emailExists = await User.findOne({
+      where: {
+        email,
+      },
+    });
+
+    if (emailExists != null) {
+      const passwordtrue = await User.findOne({
+        where: {
+          email,
+          password,
+        },
+      });
+      if (passwordtrue != null) {
+        res.json("user login succesful");
+      } else {
+        res.status(401).json("User not authorized");
+      }
+    } else {
+      res.status(404).json("user not found");
+    }
+  } catch (err) {
+    res.status(403).json({ err: err });
+  }
 });
 
 sequelize
   .sync()
   .then((result) => {
     // console.log(result);
+    app.listen(3000, () => console.log("server is running on port 3000"));
   })
   .catch((err) => {
     console.log(err);
   });
-
-app.listen(3000, () => console.log("server is running on port 3000"));

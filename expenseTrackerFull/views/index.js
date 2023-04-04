@@ -65,9 +65,9 @@ logform.addEventListener("submit", async (e) => {
     await axios.post("http://localhost:3000/login", postObjlog);
   } catch (err) {
     if (err.message == "Request failed with status code 403") {
-      htextshowlog.textContent = "user already exist";
+      htextshowlog.textContent = "user does not exist";
       htextshowlog.style.backgroundColor = "rgb(255,100, 70)";
-      htextshowlog.style.width = "30%";
+      htextshowlog.style.width = "70%";
       setTimeout(() => {
         htextshowlog.textContent = "";
       }, 5000);
