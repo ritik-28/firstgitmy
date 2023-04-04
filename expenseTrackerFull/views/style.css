@@ -1,6 +1,19 @@
 * {
   box-sizing: border-box;
 }
+.loginrow {
+  width: 80%;
+  height: 60%;
+}
+/* .regshow {
+  height: 65%;
+}
+.hideshow {
+  height: 70%;
+} */
+.grouplogin {
+  margin-top: 30px;
+}
 .form-div {
   position: relative;
   width: 80%;

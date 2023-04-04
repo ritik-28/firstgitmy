@@ -11,14 +11,21 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
 
+function isStrValidator(str) {
+  if (str == undefined || str.length == 0) {
+    return true;
+  }
+}
+
 app.post("/signup", async (req, res, next) => {
   try {
-    const username = req.body.username;
-    const email = req.body.email;
-    const password = req.body.password;
-
+    const { username, email, password } = req.body;
     // const emailExists = await User.findOne({ email });
-    if (username == "" || email == "" || password == "") {
+    if (
+      isStrValidator(username) ||
+      isStrValidator(email) ||
+      isStrValidator(password)
+    ) {
       res.status(400).json({ err: "fill all feilds" });
     } else {
       const data = await User.create({
@@ -26,11 +33,16 @@ app.post("/signup", async (req, res, next) => {
         email,
         password,
       });
-      res.json(data);
+      res.status(201).json(`succesfully created new user`);
     }
   } catch (err) {
-    res.status(403).json({ err: `user already exist` });
+    res.status(403).json({ err: err });
   }
+});
+
+app.post("/login", (req, res, next) => {
+  // res.json("hell again");
+  res.status(403).json("login api hit");
 });
 
 sequelize

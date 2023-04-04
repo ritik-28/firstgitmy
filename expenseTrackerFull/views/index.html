@@ -10,23 +10,24 @@
       integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
+    />
     <link rel="stylesheet" href="style.css" />
   </head>
-
   <body>
-    <div class="container mx-auto col-6 col-md-8 col-lg-6 content">
-   <video autoplay muted loop id="myVideo">
-  <source src="expense.mp4" type="video/mp4">
-  Your browser does not support HTML5 video.
-</video>
-    <div class="row">
+    <video autoplay muted loop id="myVideo">
+      <source src="expense.mp4" type="video/mp4" />
+      Your browser does not support HTML5 video.
+    </video>
+    <div class="row mx-auto col-6 col-md-8 col-lg-6 hideshow" id="top">
       <div
         class="mx-auto col-10 col-md-8 col-lg-6 shadow-lg p-3 mb-5 rounded form-div"
       >
         <form class="form-add formjs" method="post">
           <div class="form-group">
-            <label for="username">Name  </label>
+            <label for="username">Name </label>
             <input
               type="text"
               class="form-control"
@@ -48,11 +49,21 @@
             />
           </div>
           <h6 class="textshow"></h6>
-          <div class="form-group">
           <label for="password">Password</label>
           <div class="form-group input-group mb-3 inside">
-            <input type="password" id="password" name="password" class="form-control" placeholder="Password" aria-label="password" aria-describedby="button-addon2" required>
-            <button class="btn btnl" type="button" id="button-addon2"><img src="eye.svg" alt=""></button>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              class="form-control"
+              placeholder="Password"
+              aria-label="password"
+              aria-describedby="button-addon2"
+              required
+            />
+            <button class="btn btnl" type="button" id="button-addon2">
+              <img src="eye.svg" alt="" />
+            </button>
           </div>
           <input
             type="submit"
@@ -62,7 +73,54 @@
             style="color: white"
           />
           <br />
-          <a href="" style="margin: 0px">or Login?</a>
+          <a href="#top" class="logdirect" style="margin: 0px">or Login?</a>
+        </form>
+      </div>
+    </div>
+
+    <div class="row mx-auto col-6 col-md-8 col-lg-6 regshow" id="top">
+      <div
+        class="mx-auto col-10 col-md-8 col-lg-6 shadow-lg p-3 mb-5 rounded form-div"
+      >
+        <form class="form-add form2" method="post">
+          <div class="form-group grouplogin">
+            <label for="emaillog">Email</label>
+            <input
+              type="email"
+              class="form-control"
+              id="emaillog"
+              name="email"
+              placeholder="user@gmail.com"
+              required
+            />
+          </div>
+          <h6 class="textshowlog"></h6>
+          <label for="passwordlog">Password</label>
+          <div class="form-group input-group mb-3 inside">
+            <input
+              type="password"
+              id="passwordlog"
+              name="password"
+              class="form-control"
+              placeholder="Password"
+              aria-label="password"
+              aria-describedby="button-addon2"
+              required
+            />
+            <button class="btn btnl" type="button" id="button-addon2">
+              <img src="eye.svg" alt="" />
+            </button>
+          </div>
+          <br />
+          <input
+            type="submit"
+            value="Login"
+            class="btn bg-primary"
+            id="submitbtn"
+            style="color: white"
+          />
+          <br />
+          <a href="#top" class="regdirect" style="margin: 0px">new user?</a>
         </form>
       </div>
     </div>
