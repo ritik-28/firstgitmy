@@ -1,54 +1,38 @@
-body {
-  background-color: rgb(205, 222, 238);
-}
-.container {
-  margin-top: 50px;
-  margin-left: 350px;
+* {
+  box-sizing: border-box;
 }
 .form-div {
-  background-color: rgba(38, 189, 126, 0.763);
-  border-radius: 20px;
+  position: relative;
+  width: 80%;
+  height: 60%;
+  background-color: rgba(13, 223, 146, 0.3);
+  background-size: 400px;
+  margin-top: 50px;
+  border-radius: 4px;
 }
 .form-group {
   margin-top: 10px;
 }
-.row {
-  margin-bottom: 0px;
+.fa-eye {
+  position: absolute;
+  top: 28%;
+  right: 4%;
+  cursor: pointer;
+  color: rgb(211, 211, 211);
 }
-.alert {
-  margin-bottom: 0px;
+.btnl {
+  background-color: rgb(255, 255, 255);
 }
 .btn {
-  margin-top: 15px;
+  margin-top: 0px;
 }
-.list-group {
-  margin-top: 15px;
-  margin-bottom: 10px;
+#myVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
 }
-.btnly {
-  float: right;
+.inside {
+  margin-top: 0px;
 }
-.btnln {
-  float: right;
-}
-.list-group button {
-  margin-top: 0;
-  margin-right: 2px;
-}
-.hidden {
-  display: none;
-}
-
-/* const listmake = ` <li class="list-group-item">
-${todoObj.todoname}   ${todoObj.descritption}
-<button type="button" class="btn btn-danger btn-sm btnln">
- &#10006
-</button>
-<button type="button" class="btn btn-primary btn-sm btnly">
-&#10003
-</button>
-</li>`;
-listodo.insertAdjacentHTML("beforeend", listmake);
-.addEventListener("click", () => {
-  listodo.remove(listmake);
-}); */
