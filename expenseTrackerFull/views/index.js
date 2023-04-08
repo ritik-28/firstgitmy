@@ -28,7 +28,7 @@ regform.addEventListener("submit", async (e) => {
   password.value = "";
 
   try {
-    await axios.post("http://localhost:3000/signup", postObj);
+    const data = await axios.post("http://localhost:3000/signup", postObj);
   } catch (err) {
     if (err.message == "Request failed with status code 403") {
       htext.textContent = "user already exist";
@@ -62,10 +62,14 @@ logform.addEventListener("submit", async (e) => {
   passwordlog.value = "";
 
   try {
-    await axios.post("http://localhost:3000/login", postObjlog);
+    const yes = await axios.post("http://localhost:3000/login", postObjlog);
+    if (yes.data == "user login succesful") {
+      window.location.href = "seperate.html";
+    }
   } catch (err) {
-    if (err.message == "Request failed with status code 403") {
-      htextshowlog.textContent = "user does not exist";
+    console.log(err);
+    if (err.message == "Request failed with status code 401") {
+      htextshowlog.textContent = "";
       htextshowlog.style.backgroundColor = "rgb(255,100, 70)";
       htextshowlog.style.width = "70%";
       setTimeout(() => {

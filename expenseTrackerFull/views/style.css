@@ -1,6 +1,9 @@
 * {
   box-sizing: border-box;
 }
+body {
+  background-color: rgb(202, 254, 254);
+}
 .loginrow {
   width: 80%;
   height: 60%;
