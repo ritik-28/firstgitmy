@@ -4,12 +4,14 @@ const strVal = require("../util/strValidator");
 const incomePost = async (req, res, next) => {
   try {
     const { description, amount } = req.body;
+    const userId = req.headers["id"];
     if (strVal(description) || strVal(amount)) {
       return res.status(400).json({ err: "fill all feilds" });
     } else {
       await Income.create({
         description,
         amount,
+        userId: userId,
       });
       return res.status(201).json("new income has been created in table");
     }
@@ -20,7 +22,12 @@ const incomePost = async (req, res, next) => {
 
 const incomeGet = async (req, res, next) => {
   try {
-    const getRes = await Income.findAll();
+    const userId = req.headers["id"];
+    const getRes = await Income.findAll({
+      where: {
+        userId,
+      },
+    });
     const arr = [];
     getRes.forEach((element) => {
       arr.push(element.dataValues);

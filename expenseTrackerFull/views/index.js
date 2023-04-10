@@ -52,19 +52,24 @@ regdirect.addEventListener("click", () => {
   hideshow.style.display = "block";
 });
 
+let userId;
+
 logform.addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const postObjlog = {
-    email: `${e.target.email.value}`,
-    password: `${e.target.password.value}`,
-  };
-
-  emaillog.value = "";
-  passwordlog.value = "";
-
   try {
+    e.preventDefault();
+    const postObjlog = {
+      email: `${e.target.email.value}`,
+      password: `${e.target.password.value}`,
+    };
+
+    emaillog.value = "";
+    passwordlog.value = "";
+
     const yes = await axios.post("http://localhost:3000/login", postObjlog);
-    if (yes.data == "user login succesful") {
+    // if (yes.data == "user login succesful")
+    if (yes.data != "") {
+      //change this
+      localStorage.setItem("id", yes.data);
       window.location.href = "seperate.html";
     }
   } catch (err) {

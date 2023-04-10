@@ -4,6 +4,7 @@ const strVal = require("../util/strValidator");
 const expensePost = async (req, res, next) => {
   try {
     const { description, amount, category } = req.body;
+    const userId = req.headers["id"];
     if (strVal(description) || strVal(amount) || strVal(category)) {
       return res.status(400).json({ err: "fill all feilds" });
     } else {
@@ -11,6 +12,7 @@ const expensePost = async (req, res, next) => {
         description,
         amount,
         category,
+        userId: userId,
       });
       return res.status(201).json("new expense created in table");
     }
@@ -21,7 +23,12 @@ const expensePost = async (req, res, next) => {
 
 const expenseGet = async (req, res, next) => {
   try {
-    const getRes = await Expenses.findAll();
+    const userId = req.headers["id"];
+    const getRes = await Expenses.findAll({
+      where: {
+        userId,
+      },
+    });
     const arr = [];
     getRes.forEach((element) => {
       arr.push(element.dataValues);

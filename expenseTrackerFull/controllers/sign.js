@@ -2,12 +2,10 @@ const User = require("../model/user");
 const bcrypt = require("bcrypt");
 const strVal = require("../util/strValidator");
 
-
 const signupPost = async (req, res, next) => {
   try {
     const { username, email, password } = req.body;
     // const emailExists = await User.findOne({ email });
-    console.log(username, email, password);
     if (strVal(username) || strVal(email) || strVal(password)) {
       return res.status(400).json({ err: "fill all feilds" });
     } else {
@@ -53,7 +51,7 @@ const signinPost = async (req, res, next) => {
         if (err) {
           return res.status(500).json("something went wrong");
         } else if (result === true) {
-          return res.json("user login succesful");
+          return res.json(`${emailExists.dataValues.id}`);
         } else {
           return res.status(401).json("User not authorized");
         }
