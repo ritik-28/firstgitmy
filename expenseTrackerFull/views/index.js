@@ -29,6 +29,7 @@ regform.addEventListener("submit", async (e) => {
 
   try {
     const data = await axios.post("http://localhost:3000/signup", postObj);
+    console.log(data);
   } catch (err) {
     if (err.message == "Request failed with status code 403") {
       htext.textContent = "user already exist";
