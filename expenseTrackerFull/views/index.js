@@ -66,14 +66,11 @@ logform.addEventListener("submit", async (e) => {
     passwordlog.value = "";
 
     const yes = await axios.post("http://localhost:3000/login", postObjlog);
-    // if (yes.data == "user login succesful")
     if (yes.data != "") {
-      //change this
-      localStorage.setItem("id", yes.data);
+      localStorage.setItem("token", yes.data);
       window.location.href = "seperate.html";
     }
   } catch (err) {
-    console.log(err);
     if (err.message == "Request failed with status code 401") {
       htextshowlog.textContent = "";
       htextshowlog.style.backgroundColor = "rgb(255,100, 70)";

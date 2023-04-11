@@ -1,6 +1,7 @@
 const User = require("../model/user");
 const bcrypt = require("bcrypt");
 const strVal = require("../util/strValidator");
+const jwt = require("jsonwebtoken");
 
 const signupPost = async (req, res, next) => {
   try {
@@ -32,6 +33,13 @@ const signupPost = async (req, res, next) => {
   }
 };
 
+function generateToken(id) {
+  return jwt.sign(
+    { userId: id, name: "ritik" },
+    "mynewsecretkey28hellohellohello"
+  );
+}
+
 const signinPost = async (req, res, next) => {
   try {
     const { email, password } = req.body;
@@ -51,7 +59,7 @@ const signinPost = async (req, res, next) => {
         if (err) {
           return res.status(500).json("something went wrong");
         } else if (result === true) {
-          return res.json(`${emailExists.dataValues.id}`);
+          return res.json(generateToken(emailExists.dataValues.id));
         } else {
           return res.status(401).json("User not authorized");
         }

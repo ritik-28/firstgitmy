@@ -28,14 +28,14 @@ formhide2.addEventListener("submit", async (e) => {
 
 async function postIN(obj) {
   const postRes = await axios.post("http://localhost:3000/income", obj, {
-    headers: { id: `${localStorage.getItem("id")}` },
+    headers: { authorization: `${localStorage.getItem("token")}` },
   });
   return postRes;
 }
 
 async function postEX(obj) {
   const postRes = await axios.post("http://localhost:3000/expenses", obj, {
-    headers: { id: `${localStorage.getItem("id")}` },
+    headers: { authorization: `${localStorage.getItem("token")}` },
   });
   return postRes;
 }
@@ -74,7 +74,7 @@ newbtn2.addEventListener("click", () => {
 
 window.addEventListener("DOMContentLoaded", async () => {
   const getRes = await axios.get("http://localhost:3000/expenses", {
-    headers: { id: `${localStorage.getItem("id")}` },
+    headers: { authorization: `${localStorage.getItem("token")}` },
   });
   getRes.data.forEach((element) => {
     const income = `${element.description}\u00A0 \u00A0 \u00A0 \u00A0 ₹ ${element.amount}\u00A0 \u00A0 \u00A0 \u00A0${element.category}`;
@@ -82,7 +82,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     listdone.appendChild(li);
   });
   const getIn = await axios.get("http://localhost:3000/income", {
-    headers: { id: `${localStorage.getItem("id")}` },
+    headers: { authorization: `${localStorage.getItem("token")}` },
   });
   getIn.data.forEach((el) => {
     const income = `${el.description}\u00A0 \u00A0 \u00A0 \u00A0 ₹ ${el.amount}`;
@@ -104,14 +104,14 @@ function makeLi(income) {
   buttondel.style.float = "right";
   buttondel.append(document.createTextNode("x"));
 
-  const buttoncheck = document.createElement("button");
-  buttoncheck.className = "btn btn-primary btn-sm btnly";
-  buttoncheck.style.width = "8%";
-  buttoncheck.style.float = "right";
-  buttoncheck.append(document.createTextNode("edit"));
+  // const buttoncheck = document.createElement("button");
+  // buttoncheck.className = "btn btn-primary btn-sm btnly";
+  // buttoncheck.style.width = "8%";
+  // buttoncheck.style.float = "right";
+  // buttoncheck.append(document.createTextNode("edit"));
 
   li.appendChild(document.createTextNode(income));
-  li.appendChild(buttoncheck);
+  // li.appendChild(buttoncheck);
   li.appendChild(buttondel);
   return li;
 }
