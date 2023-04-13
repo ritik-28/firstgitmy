@@ -4,6 +4,7 @@ const newbtn2 = document.querySelector(".newbtn2");
 const formhide2 = document.querySelector(".formhide2");
 const listodo = document.querySelector(".list-todo");
 const listdone = document.querySelector(".list-done");
+const rzpButton = document.querySelector(".rzp-button");
 
 formhide2.addEventListener("submit", async (e) => {
   try {
@@ -76,11 +77,12 @@ window.addEventListener("DOMContentLoaded", async () => {
   const getRes = await axios.get("http://localhost:3000/expenses", {
     headers: { authorization: `${localStorage.getItem("token")}` },
   });
-  getRes.data.forEach((element) => {
+  getRes.data.arr.forEach((element) => {
     const income = `${element.description}\u00A0 \u00A0 \u00A0 \u00A0 ₹ ${element.amount}\u00A0 \u00A0 \u00A0 \u00A0${element.category}`;
     const li = makeLi(income);
     listdone.appendChild(li);
   });
+  const isPrimium = getRes.data.isPrimium[0].isPrimium;
   const getIn = await axios.get("http://localhost:3000/income", {
     headers: { authorization: `${localStorage.getItem("token")}` },
   });
@@ -88,6 +90,58 @@ window.addEventListener("DOMContentLoaded", async () => {
     const income = `${el.description}\u00A0 \u00A0 \u00A0 \u00A0 ₹ ${el.amount}`;
     const li = makeLi(income);
     listodo.appendChild(li);
+  });
+  if (isPrimium) {
+    primium();
+  } else {
+    rzpButton.style.display = "block";
+  }
+});
+
+function primium() {
+  rzpButton.textContent = "Premium User";
+  rzpButton.disabled = true;
+  rzpButton.style.background = "orange";
+  rzpButton.style.display = "block";
+  rzpButton.style.color = "black";
+}
+
+rzpButton.addEventListener("click", async (req, res, next) => {
+  const token = localStorage.getItem("token");
+  const response = await axios.get("http://localhost:3000/primiummembership", {
+    headers: { authorization: token },
+  });
+
+  var options = {
+    key: response.data.key_id,
+    order_id: response.data.order.id,
+    handler: async function (response) {
+      await axios.post(
+        "http://localhost:3000/updatetransactionstatus",
+        {
+          order_id: options.order_id,
+          payment_id: response.razorpay_payment_id,
+        },
+        {
+          headers: { authorization: token },
+        }
+      );
+      alert("Transaction Successful, you are a primium user now");
+      primium();
+    },
+  };
+  const rzp1 = new Razorpay(options);
+  rzp1.open();
+
+  rzp1.on("payment.failed", async function (response) {
+    alert("Transaction Failed");
+    await axios.post(
+      "http://localhost:3000/failedpayment",
+      { order_id: options.order_id },
+      {
+        headers: { authorization: token },
+      }
+    );
   });
 });
 

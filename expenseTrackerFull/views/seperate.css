@@ -132,11 +132,9 @@
 .newbtn1,
 .newbtn2 {
   border-radius: 25px;
-  margin-left: 572px;
-  margin-top: 20px;
   /* padding: 5px; */
   /* height: 40px; */
-  font-size: x-large;
+  font-size: medium;
 }
 .formhide {
   display: none;

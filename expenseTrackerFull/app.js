@@ -6,6 +6,7 @@ const sequelize = require("./model/database");
 const User = require("./model/user");
 const Expense = require("./model/expense");
 const Income = require("./model/income");
+const Order = require("./model/orders");
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.use(cors());
 const expenseRoutes = require("./routes/expenseRoutes");
 const IncomeRoutes = require("./routes/incomeRoutes");
 const signRoutes = require("./routes/signRoutes");
+const primiumRoutes = require("./routes/primium");
 
 User.hasMany(Expense);
 Expense.belongsTo(User);
@@ -23,6 +25,10 @@ Expense.belongsTo(User);
 User.hasMany(Income);
 Income.belongsTo(User);
 
+User.hasMany(Order);
+Order.belongsTo(User);
+
+app.use(primiumRoutes);
 app.use(signRoutes);
 app.use(expenseRoutes);
 app.use(IncomeRoutes);

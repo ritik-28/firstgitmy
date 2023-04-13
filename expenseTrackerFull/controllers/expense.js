@@ -1,5 +1,6 @@
 const Expenses = require("../model/expense");
 const strVal = require("../util/strValidator");
+const User = require("../model/user");
 
 const expensePost = async (req, res, next) => {
   try {
@@ -31,7 +32,12 @@ const expenseGet = async (req, res, next) => {
     getRes.forEach((element) => {
       arr.push(element.dataValues);
     });
-    return res.json(arr);
+    const isPrimium = await User.findAll({
+      where: {
+        id: req.user.id,
+      },
+    });
+    return res.json({ arr, isPrimium });
   } catch (err) {
     return res.json({ err: err });
   }
