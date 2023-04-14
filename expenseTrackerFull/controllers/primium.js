@@ -70,4 +70,8 @@ const paymentfailed = async (req, res, next) => {
     res.status(201).json({ success: false, message: "Transaction Failed" });
 };
 
-module.exports = { purchasePrimium, updatetransactionstatus, paymentfailed };
+module.exports = {
+  purchasePrimium,
+  updatetransactionstatus,
+  paymentfailed,
+};

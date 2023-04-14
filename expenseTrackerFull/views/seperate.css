@@ -199,3 +199,6 @@
   color: rgb(3, 58, 37);
 }
 /*  */
+.hidden {
+  display: none;
+}

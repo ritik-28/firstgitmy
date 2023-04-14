@@ -5,6 +5,10 @@ const formhide2 = document.querySelector(".formhide2");
 const listodo = document.querySelector(".list-todo");
 const listdone = document.querySelector(".list-done");
 const rzpButton = document.querySelector(".rzp-button");
+const leaderboard = document.querySelector(".leaderboard");
+const container2 = document.querySelector(".container-new");
+const container3 = document.querySelector(".container-3");
+const con1 = document.querySelector(".con1");
 
 formhide2.addEventListener("submit", async (e) => {
   try {
@@ -66,11 +70,15 @@ formhide.addEventListener("submit", async (e) => {
 newbtn1.addEventListener("click", () => {
   newbtn1.style.display = "none";
   formhide2.style.display = "block";
+  container2.style.display = "block";
+  con1.style.display = "none";
 });
 
 newbtn2.addEventListener("click", () => {
   newbtn2.style.display = "none";
   formhide.style.display = "block";
+  container2.style.display = "block";
+  con1.style.display = "none";
 });
 
 window.addEventListener("DOMContentLoaded", async () => {
@@ -142,6 +150,34 @@ rzpButton.addEventListener("click", async (req, res, next) => {
         headers: { authorization: token },
       }
     );
+  });
+});
+
+leaderboard.addEventListener("click", async (e) => {
+  const leader = await axios.get(
+    "http://localhost:3000/premium/showleaderboard",
+    {
+      headers: { authorization: `${localStorage.getItem("token")}` },
+    }
+  );
+  container2.style.display = "none";
+  con1.style.display = "block";
+  con1.style.overflowY = "scroll";
+
+  leader.data.forEach((element) => {
+    const li = document.createElement("li");
+    li.className = "list-group-item";
+    li.style.borderRadius = "13px";
+    li.style.marginTop = "8px";
+    li.style.color = "green";
+    li.style.fontSize = "20px";
+    li.style.paddingLeft = "30px";
+    li.append(
+      document.createTextNode(
+        `Name : \u00A0\u00A0 ${element.name}\u00A0 \u00A0 \u00A0 \u00A0\u00A0 \u00A0 \u00A0 \u00A0 Total Expense : \u00A0\u00A0${element.total_cost}`
+      )
+    );
+    con1.appendChild(li);
   });
 });
 

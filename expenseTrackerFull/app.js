@@ -18,6 +18,7 @@ const expenseRoutes = require("./routes/expenseRoutes");
 const IncomeRoutes = require("./routes/incomeRoutes");
 const signRoutes = require("./routes/signRoutes");
 const primiumRoutes = require("./routes/primium");
+const premiumFeaturesRoutes = require("./routes/premiumFeatures");
 
 User.hasMany(Expense);
 Expense.belongsTo(User);
@@ -32,6 +33,7 @@ app.use(primiumRoutes);
 app.use(signRoutes);
 app.use(expenseRoutes);
 app.use(IncomeRoutes);
+app.use("/premium", premiumFeaturesRoutes);
 
 sequelize
   .sync()
