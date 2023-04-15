@@ -1,28 +1,26 @@
-const Order = require("../model/orders");
 const User = require("../model/user");
-const Expense = require("../model/expense");
 const Expenses = require("../model/expense");
+const sequelize = require("../model/database");
 
 const premiumFeature = async (req, res, next) => {
   try {
-    const expenses = await Expense.findAll();
-    const users = await User.findAll();
-    const userAgregateExpenses = {};
-    expenses.forEach((element) => {
-      if (userAgregateExpenses[element.dataValues.userId]) {
-        userAgregateExpenses[element.dataValues.userId] =
-          userAgregateExpenses[element.dataValues.userId] +
-          element.dataValues.amount;
-      } else {
-        userAgregateExpenses[element.dataValues.userId] =
-          element.dataValues.amount;
-      }
+    const users = await User.findAll({
+      attributes: ["id", "name"],
     });
+    const userAgregateExpenses = await Expenses.findAll({
+      attributes: [
+        "userId",
+        [sequelize.fn("sum", sequelize.col("amount")), "total_cost"],
+      ],
+      group: ["userId"],
+    });
+
+    console.log(userAgregateExpenses);
     const userDetails = [];
     users.forEach((user) => {
       userDetails.push({
         name: user.dataValues.name,
-        total_cost: userAgregateExpenses[user.id],
+        total_cost: userAgregateExpenses[0].dataValues.total_cost,
       });
     });
 
