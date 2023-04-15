@@ -90,7 +90,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     const li = makeLi(income);
     listdone.appendChild(li);
   });
-  const isPrimium = getRes.data.isPrimium[0].isPrimium;
+  const isPremium = getRes.data.isPremium;
   const getIn = await axios.get("http://localhost:3000/income", {
     headers: { authorization: `${localStorage.getItem("token")}` },
   });
@@ -99,7 +99,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     const li = makeLi(income);
     listodo.appendChild(li);
   });
-  if (isPrimium) {
+  if (isPremium) {
     primium();
   } else {
     rzpButton.style.display = "block";

@@ -32,12 +32,8 @@ const expenseGet = async (req, res, next) => {
     getRes.forEach((element) => {
       arr.push(element.dataValues);
     });
-    const isPrimium = await User.findAll({
-      where: {
-        id: req.user.id,
-      },
-    });
-    return res.json({ arr, isPrimium });
+    const isPremium = req.user.dataValues.isPrimium;
+    return res.json({ arr, isPremium });
   } catch (err) {
     return res.json({ err: err });
   }
