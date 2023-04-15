@@ -25,6 +25,7 @@ const signupPost = async (req, res, next) => {
           email,
           password: hash,
           isPrimium: false,
+          totalExpense: 0,
         });
         return res.status(201).json(`succesfully created new user`);
       });

@@ -163,9 +163,8 @@ leaderboard.addEventListener("click", async (e) => {
   container2.style.display = "none";
   con1.style.display = "block";
   con1.style.overflowY = "scroll";
-  console.log(leader);
 
-  leader.data.forEach((element) => {
+  for (let i = 0; i < leader.data.name.length; i++) {
     const li = document.createElement("li");
     li.className = "list-group-item";
     li.style.borderRadius = "13px";
@@ -175,11 +174,11 @@ leaderboard.addEventListener("click", async (e) => {
     li.style.paddingLeft = "30px";
     li.append(
       document.createTextNode(
-        `Name : \u00A0\u00A0 ${element.name}\u00A0 \u00A0 \u00A0 \u00A0\u00A0 \u00A0 \u00A0 \u00A0 Total Expense : \u00A0\u00A0${element.total_cost}`
+        `Name : \u00A0\u00A0 ${leader.data.name[i]}\u00A0 \u00A0 \u00A0 \u00A0\u00A0 \u00A0 \u00A0 \u00A0 Total Expense : \u00A0\u00A0${leader.data.total[i]}`
       )
     );
     con1.appendChild(li);
-  });
+  }
 });
 
 function makeLi(income) {

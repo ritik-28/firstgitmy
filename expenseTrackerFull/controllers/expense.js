@@ -1,6 +1,7 @@
 const Expenses = require("../model/expense");
 const strVal = require("../util/strValidator");
 const User = require("../model/user");
+const sequelize = require("../model/database");
 
 const expensePost = async (req, res, next) => {
   try {
@@ -14,6 +15,21 @@ const expensePost = async (req, res, next) => {
         category,
         userId: req.user.id,
       });
+      const addExpense = expense.dataValues.amount;
+
+      const priviousTotal = await User.findAll({
+        attributes: ["totalExpense"],
+        where: {
+          id: expense.dataValues.userId,
+        },
+      });
+      const totalExpense = priviousTotal[0].dataValues.totalExpense;
+      await User.update(
+        {
+          totalExpense: parseFloat(totalExpense) + parseFloat(addExpense),
+        },
+        { where: { id: expense.dataValues.userId } }
+      );
       return res.status(201).json("new expense created in table");
     }
   } catch (err) {

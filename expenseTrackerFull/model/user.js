@@ -27,6 +27,10 @@ const User = sequelize.define("users", {
     allowNull: false,
   },
   isPrimium: Sequelize.BOOLEAN,
+  totalExpense: {
+    type: Sequelize.BIGINT,
+    defaultValue: 0,
+  },
 });
 
 module.exports = User;

@@ -5,21 +5,16 @@ const sequelize = require("../model/database");
 const premiumFeature = async (req, res, next) => {
   try {
     const users = await User.findAll({
-      attributes: [
-        "id",
-        "name",
-        [sequelize.fn("sum", sequelize.col("expenses.amount")), "total_cost"],
-      ],
-      include: [
-        {
-          model: Expenses,
-          attributes: [],
-        },
-      ],
-      group: ["users.id"],
-      order: [["total_cost", "DESC"]],
+      attributes: ["id", "name", "totalExpense"],
     });
-    res.status(200).json(users);
+    const total = [];
+    const name = [];
+    users.forEach((element) => {
+      total.push(element.dataValues.totalExpense);
+      name.push(element.dataValues.name);
+    });
+    total.sort((a, b) => b - a);
+    res.status(200).json({ total, name });
   } catch (err) {
     res.status(500).json({ err: err });
   }
