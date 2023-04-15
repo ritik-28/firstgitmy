@@ -163,6 +163,7 @@ leaderboard.addEventListener("click", async (e) => {
   container2.style.display = "none";
   con1.style.display = "block";
   con1.style.overflowY = "scroll";
+  console.log(leader);
 
   leader.data.forEach((element) => {
     const li = document.createElement("li");
