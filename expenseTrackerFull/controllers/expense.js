@@ -4,28 +4,34 @@ const User = require("../model/user");
 const sequelize = require("../model/database");
 
 const expensePost = async (req, res, next) => {
+  const t = await sequelize.transaction();
   try {
     const { description, amount, category } = req.body;
     if (strVal(description) || strVal(amount) || strVal(category)) {
       return res.status(400).json({ err: "fill all feilds" });
     } else {
-      const expense = await Expenses.create({
-        description,
-        amount,
-        category,
-        userId: req.user.id,
-      });
+      const expense = await Expenses.create(
+        {
+          description,
+          amount,
+          category,
+          userId: req.user.id,
+        },
+        { transaction: t }
+      );
       const totalExpense =
         Number(req.user.totalExpense) + Number(expense.dataValues.amount);
       await User.update(
         {
           totalExpense: totalExpense,
         },
-        { where: { id: req.user.id } }
+        { where: { id: req.user.id }, transaction: t }
       );
+      await t.commit();
       return res.status(201).json("new expense created in table");
     }
   } catch (err) {
+    await t.rollback();
     return res.status(403).json({ err: err });
   }
 };

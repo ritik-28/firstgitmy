@@ -8,8 +8,6 @@ const premiumFeature = async (req, res, next) => {
       attributes: ["name", "totalExpense"],
       order: [["totalExpense", "DESC"]],
     });
-
-    console.log(users);
     res.status(200).json({ users });
   } catch (err) {
     res.status(500).json({ err: err });
