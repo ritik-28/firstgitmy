@@ -28,7 +28,7 @@ const User = sequelize.define("users", {
   },
   isPrimium: Sequelize.BOOLEAN,
   totalExpense: {
-    type: Sequelize.BIGINT,
+    type: Sequelize.INTEGER,
     defaultValue: 0,
   },
 });

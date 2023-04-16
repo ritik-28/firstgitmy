@@ -36,7 +36,7 @@ app.use(IncomeRoutes);
 app.use("/premium", premiumFeaturesRoutes);
 
 sequelize
-  .sync({ alter: true })
+  .sync()
   .then((result) => {
     // console.log(result);
     app.listen(3000, () => console.log("server is running on port 3000"));

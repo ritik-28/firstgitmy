@@ -69,6 +69,7 @@ formhide.addEventListener("submit", async (e) => {
 
 newbtn1.addEventListener("click", () => {
   newbtn1.style.display = "none";
+  newbtn2.style.display = "none";
   formhide2.style.display = "block";
   container2.style.display = "block";
   con1.style.display = "none";
@@ -76,6 +77,7 @@ newbtn1.addEventListener("click", () => {
 
 newbtn2.addEventListener("click", () => {
   newbtn2.style.display = "none";
+  newbtn1.style.display = "none";
   formhide.style.display = "block";
   container2.style.display = "block";
   con1.style.display = "none";
@@ -164,7 +166,7 @@ leaderboard.addEventListener("click", async (e) => {
   con1.style.display = "block";
   con1.style.overflowY = "scroll";
 
-  for (let i = 0; i < leader.data.name.length; i++) {
+  leader.data.users.forEach((el) => {
     const li = document.createElement("li");
     li.className = "list-group-item";
     li.style.borderRadius = "13px";
@@ -174,11 +176,11 @@ leaderboard.addEventListener("click", async (e) => {
     li.style.paddingLeft = "30px";
     li.append(
       document.createTextNode(
-        `Name : \u00A0\u00A0 ${leader.data.name[i]}\u00A0 \u00A0 \u00A0 \u00A0\u00A0 \u00A0 \u00A0 \u00A0 Total Expense : \u00A0\u00A0${leader.data.total[i]}`
+        `Name : \u00A0\u00A0 ${el.name}\u00A0 \u00A0 \u00A0 \u00A0\u00A0 \u00A0 \u00A0 \u00A0 Total Expense : \u00A0\u00A0${el.totalExpense}`
       )
     );
     con1.appendChild(li);
-  }
+  });
 });
 
 function makeLi(income) {

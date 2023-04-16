@@ -15,20 +15,13 @@ const expensePost = async (req, res, next) => {
         category,
         userId: req.user.id,
       });
-      const addExpense = expense.dataValues.amount;
-
-      const priviousTotal = await User.findAll({
-        attributes: ["totalExpense"],
-        where: {
-          id: expense.dataValues.userId,
-        },
-      });
-      const totalExpense = priviousTotal[0].dataValues.totalExpense;
+      const totalExpense =
+        Number(req.user.totalExpense) + Number(expense.dataValues.amount);
       await User.update(
         {
-          totalExpense: parseFloat(totalExpense) + parseFloat(addExpense),
+          totalExpense: totalExpense,
         },
-        { where: { id: expense.dataValues.userId } }
+        { where: { id: req.user.id } }
       );
       return res.status(201).json("new expense created in table");
     }
