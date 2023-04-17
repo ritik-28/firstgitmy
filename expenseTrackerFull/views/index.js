@@ -12,20 +12,8 @@ const logform = document.querySelector(".form2");
 const emaillog = document.querySelector("#emaillog");
 const passwordlog = document.querySelector("#passwordlog");
 const htextshowlog = document.querySelector(".textshowlog");
-const pwdshow = document.querySelector(".pwdshow");
-const forpwd = document.querySelector(".forpwd");
-const forgotPwd = document.querySelector(".form3");
-const regpwd = document.querySelector(".regpwd");
 
 regshow.style.display = "none";
-pwdshow.style.display = "none";
-
-forgotPwd.addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const postobj = e.target.emailpwd.value;
-  await axios.post("http://localhost:3000/password/forgotpassword", postobj);
-  e.target.emailpwd.value = "";
-});
 
 regform.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -60,17 +48,6 @@ logdirect.addEventListener("click", () => {
 
 regdirect.addEventListener("click", () => {
   regshow.style.display = "none";
-  hideshow.style.display = "block";
-});
-
-forpwd.addEventListener("click", () => {
-  pwdshow.style.display = "block";
-  regshow.style.display = "none";
-  hideshow.style.display = "none";
-});
-
-regpwd.addEventListener("click", () => {
-  pwdshow.style.display = "none";
   hideshow.style.display = "block";
 });
 
