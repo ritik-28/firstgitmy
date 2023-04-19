@@ -21,10 +21,21 @@ regshow.style.display = "none";
 pwdshow.style.display = "none";
 
 forgotPwd.addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const postobj = { email: e.target.emailpwd.value };
-  await axios.post("http://localhost:3000/password/forgotpassword", postobj);
-  e.target.emailpwd.value = "";
+  try {
+    e.preventDefault();
+    const postobj = { email: e.target.emailpwd.value };
+    const res = await axios.post(
+      "http://localhost:3000/password/forgotpassword",
+      postobj
+    );
+    if (res.status === 202) {
+      forgotPwd.innerHTML +=
+        '<div style="color:red;">Mail Successfuly sent <div>';
+    }
+    e.target.emailpwd.value = "";
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 regform.addEventListener("submit", async (e) => {

@@ -7,6 +7,7 @@ const User = require("./model/user");
 const Expense = require("./model/expense");
 const Income = require("./model/income");
 const Order = require("./model/orders");
+const Forgotpassword = require("./model/ForgotPasswordRequests");
 
 const app = express();
 
@@ -30,6 +31,9 @@ Income.belongsTo(User);
 User.hasMany(Order);
 Order.belongsTo(User);
 
+User.hasMany(Forgotpassword);
+Forgotpassword.belongsTo(User);
+
 app.use("/password", forgotpwdRoutes);
 app.use(primiumRoutes);
 app.use(signRoutes);
@@ -38,7 +42,7 @@ app.use(IncomeRoutes);
 app.use("/premium", premiumFeaturesRoutes);
 
 sequelize
-  .sync()
+  .sync({ alter: true })
   .then((result) => {
     // console.log(result);
     app.listen(3000, () => console.log("server is running on port 3000"));

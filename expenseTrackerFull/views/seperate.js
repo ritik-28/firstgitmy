@@ -196,14 +196,7 @@ function makeLi(income) {
   buttondel.style.float = "right";
   buttondel.append(document.createTextNode("x"));
 
-  // const buttoncheck = document.createElement("button");
-  // buttoncheck.className = "btn btn-primary btn-sm btnly";
-  // buttoncheck.style.width = "8%";
-  // buttoncheck.style.float = "right";
-  // buttoncheck.append(document.createTextNode("edit"));
-
   li.appendChild(document.createTextNode(income));
-  // li.appendChild(buttoncheck);
   li.appendChild(buttondel);
   return li;
 }
