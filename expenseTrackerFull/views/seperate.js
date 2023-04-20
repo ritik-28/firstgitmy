@@ -9,6 +9,35 @@ const leaderboard = document.querySelector(".leaderboard");
 const container2 = document.querySelector(".container-new");
 const container3 = document.querySelector(".container-3");
 const con1 = document.querySelector(".con1");
+const containertabledata = document.querySelector(".container-new2");
+const containertableyearly = document.querySelector(".container-new3");
+const monthly = document.querySelector("#monthly");
+const yearly = document.querySelector("#yearly");
+const add = document.querySelector("#addbig");
+
+monthly.addEventListener("click", async () => {
+  container2.style.display = "none";
+  containertableyearly.style.display = "none";
+  newbtn1.style.display = "none";
+  newbtn2.style.display = "none";
+  containertabledata.style.display = "block";
+});
+
+yearly.addEventListener("click", async () => {
+  container2.style.display = "none";
+  containertabledata.style.display = "none";
+  newbtn1.style.display = "none";
+  newbtn2.style.display = "none";
+  containertableyearly.style.display = "block";
+});
+
+add.addEventListener("click", async () => {
+  containertabledata.style.display = "none";
+  containertableyearly.style.display = "none";
+  newbtn1.style.display = "block";
+  newbtn2.style.display = "block";
+  container2.style.display = "block";
+});
 
 formhide2.addEventListener("submit", async (e) => {
   try {
@@ -68,6 +97,8 @@ formhide.addEventListener("submit", async (e) => {
 });
 
 newbtn1.addEventListener("click", () => {
+  containertabledata.style.display = "none";
+  containertableyearly.style.display = "none";
   newbtn1.style.display = "none";
   newbtn2.style.display = "none";
   formhide2.style.display = "block";
@@ -76,6 +107,8 @@ newbtn1.addEventListener("click", () => {
 });
 
 newbtn2.addEventListener("click", () => {
+  containertabledata.style.display = "none";
+  containertableyearly.style.display = "none";
   newbtn2.style.display = "none";
   newbtn1.style.display = "none";
   formhide.style.display = "block";
@@ -162,6 +195,8 @@ leaderboard.addEventListener("click", async (e) => {
       headers: { authorization: `${localStorage.getItem("token")}` },
     }
   );
+  containertabledata.style.display = "none";
+  containertableyearly.style.display = "none";
   container2.style.display = "none";
   con1.style.display = "block";
   con1.style.overflowY = "scroll";
