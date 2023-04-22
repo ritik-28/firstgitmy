@@ -21,6 +21,7 @@ const signRoutes = require("./routes/signRoutes");
 const primiumRoutes = require("./routes/primium");
 const premiumFeaturesRoutes = require("./routes/premiumFeatures");
 const forgotpwdRoutes = require("./routes/forgot");
+const downloadRoutes = require("./routes/downloadRoutes");
 
 User.hasMany(Expense);
 Expense.belongsTo(User);
@@ -35,6 +36,7 @@ User.hasMany(Forgotpassword);
 Forgotpassword.belongsTo(User);
 
 app.use("/password", forgotpwdRoutes);
+app.use("/user", downloadRoutes);
 app.use(primiumRoutes);
 app.use(signRoutes);
 app.use(expenseRoutes);

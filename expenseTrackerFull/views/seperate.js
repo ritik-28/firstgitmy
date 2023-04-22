@@ -14,6 +14,7 @@ const containertableyearly = document.querySelector(".container-new3");
 const monthly = document.querySelector("#monthly");
 const yearly = document.querySelector("#yearly");
 const add = document.querySelector("#addbig");
+const downloadbtn = document.querySelector("#downloadbtn");
 
 monthly.addEventListener("click", async () => {
   container2.style.display = "none";
@@ -148,6 +149,25 @@ function primium() {
   rzpButton.style.display = "block";
   rzpButton.style.color = "black";
 }
+
+downloadbtn.addEventListener("click", async () => {
+  try {
+    const response = await axios.get("http://localhost:3000/user/download", {
+      headers: { authorization: `${localStorage.getItem("token")}` },
+    });
+    if (response.status === 201) {
+      // backend is sending download link which if we open in browser, the file would download
+      var a = document.createElement("a");
+      a.href = response.data.fileUrl;
+      a.download = "myexpense.csv";
+      a.click();
+    } else {
+      throw new Error(response.data.message);
+    }
+  } catch (err) {
+    console.log(err);
+  }
+});
 
 rzpButton.addEventListener("click", async (req, res, next) => {
   const token = localStorage.getItem("token");
