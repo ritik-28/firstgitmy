@@ -1,8 +1,3 @@
-.container {
-  /* background-color: rgb(228, 228, 228); */
-  width: 100%;
-  padding-bottom: 0px;
-}
 .container-new {
   /* background-color: rgb(228, 228, 228); */
   width: 100%;
@@ -33,6 +28,8 @@
 .container-3 {
   height: 23%;
   background-color: rgb(204, 238, 238);
+  padding-top: 20px;
+  padding-left: 50px;
 }
 .slidmy {
   /* width: 10%; */
@@ -215,4 +212,31 @@
 .thead {
   background-color: rgb(14, 164, 126);
   color: aliceblue;
+}
+@import url("https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap");
+.co {
+  background: #dde7e1;
+  padding: 15px;
+  border-radius: 3px;
+  box-shadow: -3px -3px 7px #ffffff73, 3px 3px 5px rgba(94, 104, 121, 0.288);
+}
+.pagination {
+  justify-content: flex-end;
+}
+
+.pagination button {
+  font-size: 20px;
+  text-decoration: none;
+  color: #4d3252;
+  height: 35px;
+  width: 100px;
+  display: block;
+  color: white;
+  background: rgb(10, 112, 87);
+  border-radius: 22px;
+  font-size: large;
+}
+.pagination button.active {
+  box-shadow: inset -3px -3px 7px #ffffff73,
+    inset 3px 3px 5px rgba(94, 104, 121, 0.288);
 }

@@ -15,6 +15,8 @@ const monthly = document.querySelector("#monthly");
 const yearly = document.querySelector("#yearly");
 const add = document.querySelector("#addbig");
 const downloadbtn = document.querySelector("#downloadbtn");
+const child1 = document.querySelector(".incomediv1");
+const child2 = document.querySelector(".incomediv2");
 
 monthly.addEventListener("click", async () => {
   container2.style.display = "none";
@@ -54,7 +56,7 @@ formhide2.addEventListener("submit", async (e) => {
       newbtn2.style.display = "block";
       const income = `${e.target.f1.value} \u00A0 \u00A0 \u00A0 \u00A0 ₹ ${e.target.f2.value} `;
       const li = makeLi(income);
-      listodo.appendChild(li);
+      listodo.insertAdjacentElement("afterbegin", li);
     }
   } catch (err) {
     console.log(err);
@@ -90,7 +92,7 @@ formhide.addEventListener("submit", async (e) => {
       newbtn2.style.display = "block";
       const income = `${e.target.exd.value}\u00A0 \u00A0 ₹ ${e.target.exa.value}\u00A0 \u00A0 ${e.target.exc.value}`;
       const li = makeLi(income);
-      listdone.appendChild(li);
+      listdone.insertAdjacentElement("afterbegin", li);
     }
   } catch (err) {
     console.log(err);
@@ -117,24 +119,67 @@ newbtn2.addEventListener("click", () => {
   con1.style.display = "none";
 });
 
+function createButton(list, totalExPages, exorin) {
+  const div = document.createElement("div");
+  const divpagi = document.createElement("div");
+  for (let i = 0; i < totalExPages; i++) {
+    const btn = document.createElement("button");
+    btn.appendChild(document.createTextNode(`${i + 1}`));
+    divpagi.appendChild(btn);
+    divpagi.classList = "pagination";
+    div.appendChild(divpagi);
+    div.className = "co";
+    list.insertAdjacentElement("beforeend", div);
+
+    btn.addEventListener("click", async () => {
+      const expense = await axios.get(
+        `http://localhost:3000/${exorin}?page=${i + 1}`,
+        {
+          headers: { authorization: `${localStorage.getItem("token")}` },
+        }
+      );
+      list.innerHTML = "";
+      expense.data.arr.forEach((element) => {
+        let income;
+        if (exorin == "expenses") {
+          income = `${element.description}\u00A0 \u00A0 \u00A0 \u00A0 ₹ ${element.amount}\u00A0 \u00A0 \u00A0 \u00A0${element.category}`;
+        } else {
+          income = `${element.description}\u00A0 \u00A0 \u00A0 \u00A0 ₹ ${element.amount}`;
+        }
+        const li = makeLi(income);
+        list.insertAdjacentText("afterbegin", "");
+        list.appendChild(li);
+        list.insertAdjacentElement("beforeend", div);
+      });
+    });
+  }
+  return div;
+}
+
 window.addEventListener("DOMContentLoaded", async () => {
   const getRes = await axios.get("http://localhost:3000/expenses", {
     headers: { authorization: `${localStorage.getItem("token")}` },
   });
+  const totalExPages = Math.ceil(getRes.data.totalExpense / 10);
   getRes.data.arr.forEach((element) => {
     const income = `${element.description}\u00A0 \u00A0 \u00A0 \u00A0 ₹ ${element.amount}\u00A0 \u00A0 \u00A0 \u00A0${element.category}`;
     const li = makeLi(income);
     listdone.appendChild(li);
   });
+  createButton(listdone, totalExPages, "expenses");
   const isPremium = getRes.data.isPremium;
   const getIn = await axios.get("http://localhost:3000/income", {
     headers: { authorization: `${localStorage.getItem("token")}` },
   });
-  getIn.data.forEach((el) => {
+  let totalinPages = Math.ceil(getIn.data.totalIncome / 10);
+  getIn.data.arr.forEach((el) => {
     const income = `${el.description}\u00A0 \u00A0 \u00A0 \u00A0 ₹ ${el.amount}`;
     const li = makeLi(income);
     listodo.appendChild(li);
   });
+
+  createButton(listodo, totalinPages, "income");
+
   if (isPremium) {
     primium();
   } else {

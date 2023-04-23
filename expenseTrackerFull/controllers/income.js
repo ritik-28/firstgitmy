@@ -19,9 +19,21 @@ const incomePost = async (req, res, next) => {
   }
 };
 
+const ITEM_PER_PAGE = 10;
+
 const incomeGet = async (req, res, next) => {
   try {
+    const page = +req.query.page || 1;
+    const ITEM_PER_PAGE = 10;
     const getRes = await Income.findAll({
+      where: {
+        userId: req.user.id,
+      },
+      order: [["createdAt", "DESC"]],
+      offset: (page - 1) * ITEM_PER_PAGE,
+      limit: ITEM_PER_PAGE,
+    });
+    const totalIncome = await Income.count({
       where: {
         userId: req.user.id,
       },
@@ -30,7 +42,7 @@ const incomeGet = async (req, res, next) => {
     getRes.forEach((element) => {
       arr.push(element.dataValues);
     });
-    return res.json(arr);
+    return res.json({ arr, totalIncome });
   } catch (err) {
     return res.json({ err: err });
   }

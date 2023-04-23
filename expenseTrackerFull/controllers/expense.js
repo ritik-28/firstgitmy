@@ -38,7 +38,17 @@ const expensePost = async (req, res, next) => {
 
 const expenseGet = async (req, res, next) => {
   try {
+    const page = +req.query.page || 1;
+    const ITEM_PER_PAGE = 10;
     const getRes = await Expenses.findAll({
+      where: {
+        userId: req.user.id,
+      },
+      order: [["createdAt", "DESC"]],
+      offset: (page - 1) * ITEM_PER_PAGE,
+      limit: ITEM_PER_PAGE,
+    });
+    const totalExpense = await Expenses.count({
       where: {
         userId: req.user.id,
       },
@@ -48,7 +58,7 @@ const expenseGet = async (req, res, next) => {
       arr.push(element.dataValues);
     });
     const isPremium = req.user.dataValues.isPrimium;
-    return res.json({ arr, isPremium });
+    return res.json({ arr, isPremium, totalExpense });
   } catch (err) {
     return res.json({ err: err });
   }
