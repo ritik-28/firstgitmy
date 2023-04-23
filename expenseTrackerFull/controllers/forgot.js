@@ -32,7 +32,7 @@ const forgotPwd = async (req, res, next) => {
       const doneEmail = await tranEmailApi.sendTransacEmail({
         sender,
         to: recievers,
-        subject: `sbscribe to ritik tiwari to became a developer`,
+        subject: `subscribe to expense app for more features`,
         htmlContent: `<h4>visit this link</h4><a href= "http://localhost:3000/password/resetpassword/${id}">Reset Password</a>`,
       });
       return res.status(202).json("email sent successfully");

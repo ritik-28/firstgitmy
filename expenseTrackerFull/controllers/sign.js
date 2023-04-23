@@ -36,10 +36,7 @@ const signupPost = async (req, res, next) => {
 };
 
 function generateToken(id) {
-  return jwt.sign(
-    { userId: id, name: "ritik" },
-    "mynewsecretkey28hellohellohello"
-  );
+  return jwt.sign({ userId: id, name: "ritik" }, process.env.TOKEN_SECRET);
 }
 
 const signinPost = async (req, res, next) => {

@@ -1,6 +1,11 @@
 const express = require("express");
+const fs = require("fs");
+const path = require("path");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const helmet = require("helmet");
+const morgan = require("morgan");
+require("dotenv").config();
 
 const sequelize = require("./model/database");
 const User = require("./model/user");
@@ -11,9 +16,16 @@ const Forgotpassword = require("./model/ForgotPasswordRequests");
 
 const app = express();
 
+const accessLogStream = fs.createWriteStream(
+  path.join(__dirname, "access.log"),
+  { flags: "a" }
+);
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
+app.use(helmet());
+app.use(morgan("combined", { stream: accessLogStream }));
 
 const expenseRoutes = require("./routes/expenseRoutes");
 const IncomeRoutes = require("./routes/incomeRoutes");
@@ -43,11 +55,13 @@ app.use(expenseRoutes);
 app.use(IncomeRoutes);
 app.use("/premium", premiumFeaturesRoutes);
 
+const port = process.env.PORT;
+
 sequelize
   .sync({ alter: true })
   .then((result) => {
     // console.log(result);
-    app.listen(3000, () => console.log("server is running on port 3000"));
+    app.listen(port, () => console.log("server is running on port 3000"));
   })
   .catch((err) => {
     console.log(err);

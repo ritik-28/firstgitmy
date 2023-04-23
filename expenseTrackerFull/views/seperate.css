@@ -89,7 +89,8 @@
 }
 .btn {
   width: 4%;
-  border-radius: 50%;
+  border-radius: 40%;
+  border: none;
 }
 .form-control {
   border-bottom: 3px solid black;

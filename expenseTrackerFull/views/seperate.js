@@ -138,7 +138,7 @@ function createButton(list, totalExPages, exorin) {
 
     btn.addEventListener("click", async () => {
       const expense = await axios.get(
-        `http://localhost:3000/${exorin}?page=${i + 1}&`,
+        `http://localhost:3000/${exorin}?page=${i + 1}`,
         {
           headers: { authorization: `${localStorage.getItem("token")}` },
         }
@@ -297,8 +297,8 @@ function makeLi(income) {
   li.style.marginTop = "8px";
 
   const buttondel = document.createElement("button");
-  buttondel.className = "btn btn-danger btn-sm btnln";
-  buttondel.style.width = "7%";
+  buttondel.className = "btn btn-outline-danger btn-sm";
+  buttondel.style.width = "4%";
   buttondel.style.float = "right";
   buttondel.append(document.createTextNode("x"));
 
