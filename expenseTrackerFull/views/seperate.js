@@ -18,6 +18,11 @@ const downloadbtn = document.querySelector("#downloadbtn");
 const child1 = document.querySelector(".incomediv1");
 const child2 = document.querySelector(".incomediv2");
 
+if (localStorage.getItem("pagesize") == null) {
+  const pages = +prompt("how many pages do you want to see?");
+  localStorage.setItem("pagesize", pages);
+}
+
 monthly.addEventListener("click", async () => {
   container2.style.display = "none";
   containertableyearly.style.display = "none";
@@ -133,7 +138,7 @@ function createButton(list, totalExPages, exorin) {
 
     btn.addEventListener("click", async () => {
       const expense = await axios.get(
-        `http://localhost:3000/${exorin}?page=${i + 1}`,
+        `http://localhost:3000/${exorin}?page=${i + 1}&`,
         {
           headers: { authorization: `${localStorage.getItem("token")}` },
         }
@@ -157,7 +162,8 @@ function createButton(list, totalExPages, exorin) {
 }
 
 window.addEventListener("DOMContentLoaded", async () => {
-  const getRes = await axios.get("http://localhost:3000/expenses", {
+  const nopage = localStorage.getItem("pagesize");
+  const getRes = await axios.get(`http://localhost:3000/expenses`, {
     headers: { authorization: `${localStorage.getItem("token")}` },
   });
   const totalExPages = Math.ceil(getRes.data.totalExpense / 10);
@@ -168,7 +174,7 @@ window.addEventListener("DOMContentLoaded", async () => {
   });
   createButton(listdone, totalExPages, "expenses");
   const isPremium = getRes.data.isPremium;
-  const getIn = await axios.get("http://localhost:3000/income", {
+  const getIn = await axios.get(`http://localhost:3000/income`, {
     headers: { authorization: `${localStorage.getItem("token")}` },
   });
   let totalinPages = Math.ceil(getIn.data.totalIncome / 10);
