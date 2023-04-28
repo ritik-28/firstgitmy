@@ -28,7 +28,9 @@ const expensePost = async (req, res, next) => {
         { where: { id: req.user.id }, transaction: t }
       );
       await t.commit();
-      return res.status(201).json("new expense created in table");
+      return res
+        .status(201)
+        .json({ msg: "new expense created in table", id: expense.id });
     }
   } catch (err) {
     await t.rollback();
