@@ -1,0 +1,247 @@
+.container-new {
+  /* background-color: rgb(228, 228, 228); */
+  width: 100%;
+  height: 62.2%;
+}
+.container-new2,
+.container-new3 {
+  /* background-color: rgb(228, 228, 228); */
+  width: 100%;
+  height: 62.2%;
+}
+.container-new2 {
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+}
+.caption {
+  color: green;
+  font-size: 25px;
+}
+/* .nav-nav {
+  padding-bottom: 0px;
+} */
+.cont {
+  height: 14%;
+  width: inherit;
+  background-color: rgb(255, 255, 255);
+  border-radius: 20px;
+}
+/* .con1 {
+   overflow: scroll; 
+} */
+.container-3 {
+  height: 23%;
+  background-color: rgb(204, 238, 238);
+  padding-top: 20px;
+  padding-left: 50px;
+}
+.slidmy {
+  /* width: 10%; */
+  height: 10%;
+  background-color: rgb(95, 155, 141);
+  border-radius: 15px;
+  padding-top: 0px;
+}
+.divup {
+  background-color: rgb(10, 112, 87);
+  height: 68%;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+}
+.pexp {
+  font-size: larger;
+  color: rgb(255, 255, 255);
+  padding-left: 30px;
+  padding-top: 15px;
+}
+.navmy {
+  background-color: rgb(10, 112, 87);
+  height: 28%;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  padding-bottom: 0%;
+}
+.nav-link {
+  color: rgb(255, 255, 255);
+  width: 100%;
+}
+
+.nav-item {
+  font-size: x-large;
+  font-style: normal;
+  padding-right: 113px;
+  padding-left: 120px;
+}
+.navpen {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.underdiv {
+  margin-left: 11px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+.border-bottom {
+  border-bottom: 3px solid;
+}
+.imges {
+  color: aliceblue;
+}
+.form-inline {
+  padding-top: 10px;
+}
+.btn {
+  width: 4%;
+  border-radius: 40%;
+  border: none;
+}
+.form-control {
+  border-bottom: 3px solid black;
+}
+.input-group-prepend {
+  border-bottom: 3px solid black;
+}
+
+.smalldiv {
+  width: 50%;
+  height: 100%;
+  background-color: rgb(10, 112, 87);
+  border-radius: 15px;
+  margin-left: 315px;
+}
+.datediv {
+  width: 50%;
+  height: 100%;
+  background-color: rgb(10, 112, 87);
+  margin-left: 160px;
+  color: aliceblue;
+  margin-left: 155px;
+}
+.container-date {
+  height: 3%;
+  margin-top: 0px;
+}
+.pdiv {
+  margin-left: 100px;
+  font-size: large;
+  font-family: sans-serif;
+  font-weight: bold;
+}
+.insidediv {
+  width: 100%;
+  height: 5%;
+  border-radius: 15px;
+  margin-left: 100px;
+  font-weight: 500;
+  color: green;
+}
+.fbtn {
+  font-size: xx-large;
+  width: auto;
+  border-radius: 25px;
+}
+.newbtn1,
+.newbtn2 {
+  border-radius: 25px;
+  /* padding: 5px; */
+  /* height: 40px; */
+  font-size: medium;
+}
+.formhide {
+  display: none;
+}
+.formhide2 {
+  display: none;
+}
+.addhere1,
+.addhere2 {
+  width: 50%;
+  height: 1%;
+  border-radius: 15px;
+  margin-left: 20px;
+  font-weight: 500;
+  color: green;
+}
+.list-group {
+  margin-top: 5px;
+  margin-left: 10px;
+  width: 100%;
+  height: 97%;
+  overflow-y: scroll;
+}
+.limend {
+  width: 80%;
+  height: 5.5%;
+  padding-top: 0px;
+  background-color: inherit;
+  border: none;
+}
+.list-group-item {
+  background-color: rgb(202, 254, 254);
+  width: 98%;
+}
+.limend {
+  width: 80%;
+  height: 5.5%;
+  padding-top: 0px;
+  background-color: inherit;
+  border: none;
+}
+.child {
+  width: 49%;
+  height: 97%;
+  margin-left: 6px;
+  display: inline-block;
+}
+.incomediv1 {
+  width: 98%;
+  height: 5.1%;
+  background-color: rgb(193, 202, 197);
+  border-radius: 15px;
+  /* margin-left: 10px; */
+  /* color: rgb(3, 58, 37); */
+}
+.incomediv2 {
+  width: 98%;
+  height: 5.3%;
+  background-color: rgb(193, 202, 197);
+  border-radius: 15px;
+  /* margin-left: 10px; */
+  color: rgb(3, 58, 37);
+}
+/*  */
+.hidden {
+  display: none;
+}
+.thead {
+  background-color: rgb(14, 164, 126);
+  color: aliceblue;
+}
+@import url("https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap");
+.co {
+  background: #dde7e1;
+  padding: 15px;
+  border-radius: 3px;
+  box-shadow: -3px -3px 7px #ffffff73, 3px 3px 5px rgba(94, 104, 121, 0.288);
+}
+.pagination {
+  justify-content: flex-end;
+}
+
+.pagination button {
+  font-size: 20px;
+  text-decoration: none;
+  color: #4d3252;
+  height: 35px;
+  width: 100px;
+  display: block;
+  color: white;
+  background: rgb(10, 112, 87);
+  border-radius: 22px;
+  font-size: large;
+}
+.pagination button.active {
+  box-shadow: inset -3px -3px 7px #ffffff73,
+    inset 3px 3px 5px rgba(94, 104, 121, 0.288);
+}
