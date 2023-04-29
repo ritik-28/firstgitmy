@@ -1,0 +1,77 @@
+body {
+  margin-top: 40px;
+}
+
+body::before {
+  content: "XS";
+  color: red;
+  font-size: 2rem;
+  font-weight: bold;
+  position: fixed;
+  top: 0;
+  right: 0;
+}
+.box {
+  background-color: lightblue;
+  border: 1px solid blue;
+  min-height: 50px;
+  font-size: 2rem;
+}
+
+.delAdd {
+  color: white;
+}
+
+/* li {
+  background: green;
+}
+li:nth-child(odd) {
+  background: red;
+} */
+
+@media (min-width: 576px) {
+  body::before {
+    content: "SM";
+  }
+}
+
+@media (min-width: 768px) {
+  body::before {
+    content: "MD";
+  }
+}
+
+@media (min-width: 992px) {
+  body::before {
+    content: "LG";
+  }
+}
+
+@media (min-width: 1200px) {
+  body::before {
+    content: "XL";
+  }
+}
+
+@media (min-width: 1400px) {
+  body::before {
+    content: "XXL";
+  }
+}
+
+/* 
+// //testing update
+// app.put("/update/:id", async (req, res, next) => {
+//   try {
+//     const thing = await new thing({
+//       id: req.params.id,
+//       expense: req.body.expense,
+//       description: req.body.description,
+//       category: req.body.category,
+//     });
+//     await Expense.updateOne({ id: req.params.id }, thing);
+//     res.status(201).json({ message: " updated successfully!" });
+//   } catch (error) {
+//     res.status(400).json({ error: error });
+//   }
+// }); */

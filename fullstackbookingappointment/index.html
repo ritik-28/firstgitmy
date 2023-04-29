@@ -1,0 +1,144 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Document</title>
+
+    <link rel="stylesheet" href="fulls.css" />
+  </head>
+
+  <body>
+    <div id="divide">
+      <h3 id="head1">Book a call</h3>
+
+      <h6 id="head2">
+        Book a call slot and our representive will call you within 1hr of
+        selected time
+      </h6>
+
+      <hr />
+
+      <form
+        action="/user"
+        class="form1"
+        method="post"
+        onsubmit="userDetails(event)"
+      >
+        <label for="name" class="align"> Name: </label>
+        <br />
+
+        <input type="text" id="name" name="name" />
+        <br />
+
+        <label for="Email" class="align"> Email: </label>
+        <br />
+
+        <input type="email" id="email" name="email" />
+        <br />
+
+        <label for="phone" class="align"> Phone: </label>
+        <br />
+
+        <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" />
+        <br />
+
+        <label for="call">Time for Call:</label>
+        <br />
+
+        <div class="div2">
+          <input type="date" id="call1" />
+
+          <input type="time" id="call2" />
+          <br />
+        </div>
+
+        <button
+          style="
+            background-color: orangered;
+
+            color: whitesmoke;
+
+            border-radius: 4px;
+
+            width: 100%;
+
+            margin: 3px 2px;
+          "
+        >
+          GET A CALL
+        </button>
+      </form>
+    </div>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.4/axios.min.js"
+      integrity="sha512-LUKzDoJKOLqnxGWWIBM4lzRBlxcva2ZTztO8bTcWPmDSpkErWx0bSP4pdsjNH8kiHAUPaT06UXcb+vOEZH+HpQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script>
+      async function userDetails(e) {
+        try {
+          e.preventDefault();
+          var name = e.target.name.value;
+          var email = e.target.email.value;
+          var phone = e.target.phone.value;
+          //making data to be send with post request
+          const objectForNetwork = {
+            name,
+            email,
+            phone,
+          };
+          //adding new user
+          await postData(objectForNetwork);
+        } catch (err) {
+          console.log(err);
+        }
+      }
+
+      window.addEventListener("DOMContentLoaded", () => {
+        newList();
+      });
+
+      async function deletelist(li, email) {
+        await axios.delete(`http://localhost:3000/deleteuser/${email}`);
+        li.remove();
+      }
+
+      async function newList() {
+        let getUserAll = await axios.get("http://localhost:3000/getuser");
+
+        for (let i = 0; i < getUserAll.data.length; i++) {
+          const formEl = document.querySelector(".form1");
+          const li = document.createElement("li");
+          const buttonDel = document.createElement("button");
+          buttonDel.appendChild(document.createTextNode("delete"));
+
+          const liItem = document.createTextNode(
+            `${getUserAll.data[i].name}- ${getUserAll.data[i].email}- ${getUserAll.data[i].phone}`
+          );
+          li.appendChild(liItem);
+          li.appendChild(buttonDel);
+          formEl.parentElement.insertBefore(li, formEl.nextSibling);
+
+          buttonDel.addEventListener("click", () => {
+            deletelist(li, getUserAll.data[i].email);
+          });
+        }
+      }
+
+      async function postData(objectForNetwork) {
+        await axios.post("http://localhost:3000/user", objectForNetwork);
+        newList();
+        return;
+      }
+    </script>
+  </body>
+</html>
+
+<!-- /* OTHER PLACES TO ADD THOSE // 1..... formEl.appendChild(li); // 2....
+formEl.parentElement.parentElement.insertBefore( // li, // body.nextSibling //
+); // const body = document.getElementsByTagName("body"); */ -->

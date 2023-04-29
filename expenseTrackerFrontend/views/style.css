@@ -1,0 +1,57 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  background-color: rgb(202, 254, 254);
+}
+.loginrow {
+  width: 80%;
+  height: 60%;
+}
+.regshow {
+  height: 65%;
+}
+.hideshow {
+  height: 70%;
+}
+.grouplogin {
+  margin-top: 30px;
+}
+.pwdshow {
+  height: 350px;
+}
+.form-div {
+  position: relative;
+  width: 80%;
+  height: 60%;
+  background-color: rgba(13, 223, 146, 0.3);
+  background-size: 400px;
+  margin-top: 50px;
+  border-radius: 4px;
+}
+.form-group {
+  margin-top: 10px;
+}
+.fa-eye {
+  position: absolute;
+  top: 28%;
+  right: 4%;
+  cursor: pointer;
+  color: rgb(211, 211, 211);
+}
+.btnl {
+  background-color: rgb(255, 255, 255);
+}
+.btn {
+  margin-top: 0px;
+}
+#myVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+}
+.inside {
+  margin-top: 0px;
+}

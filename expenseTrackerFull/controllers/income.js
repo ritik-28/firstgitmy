@@ -7,11 +7,13 @@ const incomePost = async (req, res, next) => {
     if (strVal(description) || strVal(amount)) {
       return res.status(400).json({ err: "fill all feilds" });
     } else {
+
       const response = await Income.create({
         description,
         amount,
         userId: req.user.id,
       });
+
       return res
         .status(201)
         .json({ msg: "new income has been created in table", id: response.id });
