@@ -1,0 +1,225 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Expense Tracker</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="seperate.css" />
+  </head>
+  <body>
+    <!-- <div class="container"> -->
+      <div class="cont">
+        <div class="divup"><p class="pexp">Day to Day Expenses</p></div>
+        <nav
+          class="navbar navbar-expand-lg navbar-light navmy navbar-expand-xxl nav-nav"
+        >
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <div class="underdiv">
+                <li class="nav-item">
+                  <a class="nav-link navbar-brand" id="downloadbtn" href="#"
+                    ><img src="pen.svg" class="navpen" alt=""
+                  /></a>
+                </li>
+              </div>
+              <div class="underdiv">
+                <li class="nav-item">
+                  <a id="addbig" class="nav-link" style="cursor: pointer"
+                    >ADD</a
+                  >
+                </li>
+              </div>
+              <div class="underdiv">
+                <li class="nav-item">
+                  <a id="monthly" class="nav-link" style="cursor: pointer"
+                    >MONTHLY</a
+                  >
+                </li>
+              </div>
+              <div class="underdiv">
+                <li class="nav-item">
+                  <a id="Yearly" class="nav-link" style="cursor: pointer"
+                    >YEARLY</a
+                  >
+                </li>
+              </div>
+            </ul>
+          </div>
+        </nav>
+      </div>
+      <div class="container-new">
+        <div class="child">
+          <div class="incomediv incomediv1">
+            <p class="pdiv">Income Description(Credit)</p>
+          </div>
+          <ul class="list-group list-todo list-group-item-success">
+          </ul>
+        </div>
+
+        <div class="child">
+          <div class="incomediv incomediv2">
+            <p class="pdiv">Expense Description(debit)</p>
+          </div>
+          <ul class="list-group list-done list-group-item-danger">
+          </ul>
+        </div>
+      </div>
+      <div class="container-new con1 hidden"></div>
+      <div class="container-new2  hidden">
+        <table class="table table-striped table-bordered caption-top tabledata tabledata1">
+          <caption class="caption">
+            Monthly Report(Expense)
+          </caption>
+          <thead class="thead">
+            <tr>
+              <th scope="col">Date</th>
+              <th scope="col">Description</th>
+              <th scope="col">Category</th>
+              <th scope="col">Expense</th> 
+            </tr>
+          </thead>
+          <tbody class="texpense">
+      <!--  -->
+          </tbody>
+        </table>
+        <table class="table table-striped table-bordered caption-top tabledata tabledata2">
+          <caption class="caption">
+            Monthly Report(Income)
+          </caption>
+          <thead class="thead">
+            <tr>
+              <th scope="col">Date</th>
+              <th scope="col">Description</th>
+              <th scope="col">Income</th>
+            </tr>
+          </thead>
+          <tbody class="tincome">
+       <!--  -->
+          </tbody>
+        </table>
+      </div>
+      <div class="container-new3 hidden">
+        <table class="table table-striped table-bordered caption-top tabledata">
+          <caption class="caption">
+            Yearly Report
+          </caption>
+          <thead class="thead">
+            <tr>
+              <th scope="col">Month</th>
+              <th scope="col">Income</th>
+              <th scope="col">Expense</th>
+              <th scope="col">Savings</th>
+            </tr>
+          </thead>
+          <tbody class="yearlyreport">
+          </tbody>
+        </table>
+      </div>
+      <div class="container-3">
+        <form class="form-inline col-8 formhide">
+          <input
+            type="text"
+            class="form-control mb-2 mr-sm-2"
+            id="inlineFormInputName2"
+            name="exd"
+            placeholder="Expense Description"
+            required
+          />
+          <div class="input-group mb-2 mr-sm-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">₹</div>
+            </div>
+            <input
+              type="text"
+              name="exa"
+              class="form-control"
+              id="inlineFormInputGroupUsername2"
+              placeholder="Expense Amount"
+              required
+            />
+          </div>
+          <label for="category" class="form-label">Choose a Category :</label>
+          <select
+            id="category"
+            name="exc"
+            name="category"
+            class="form-control-sm"
+            size="1"
+            required
+          >
+            <option>Fuel</option>
+            <option>Movie</option>
+            <option>Food</option>
+            <option>Cloth</option>
+            <option>Books</option>
+            <option>Electronics</option>
+          </select>
+          <button type="submit" class="btn fbtn btn-success mb-2">✓</button>
+        </form>
+        <!-- adding income from  here  -->
+        <form class="form-inline col-8 formhide2">
+          <input
+            type="text"
+            class="form-control mb-2 mr-sm-2 f1"
+            id="inlineFormInputName2"
+            name="f1"
+            placeholder="Income Description"
+            required
+          />
+          <div class="input-group mb-2 mr-sm-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">₹</div>
+            </div>
+            <input
+              type="number"
+              name="f2"
+              class="form-control f2"
+              id="inlineFormInputGroupUsername2"
+              placeholder="Income Amount"
+              required
+            />
+          </div>
+          <button type="submit" class="btn fbtn btn-success mb-2">✓</button>
+        </form>
+        <!-- those two buttons -->
+        <button type="submit" class="btn btn-success mb-2 fbtn newbtn1">
+          +Income
+        </button>
+        <button type="submit" class="btn btn-success mb-2 fbtn newbtn2">
+          +Expense
+        </button>
+        <button
+          type="submit"
+          class="btn btn-danger mb-2 fbtn newbtn2 rzp-button"
+        >
+          Buy premium
+        </button>
+        <button
+          type="submit"
+          class="btn btn-outline-primary mb-2 fbtn newbtn2 leaderboard"
+        >
+          Leaderboard
+        </button>
+      </div>
+    </div>
+
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.4/axios.min.js"
+      integrity="sha512-LUKzDoJKOLqnxGWWIBM4lzRBlxcva2ZTztO8bTcWPmDSpkErWx0bSP4pdsjNH8kiHAUPaT06UXcb+vOEZH+HpQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="seperate.js"></script>
+  </body>
+</html>
