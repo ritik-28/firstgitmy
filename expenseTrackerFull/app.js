@@ -34,8 +34,6 @@ const primiumRoutes = require("./routes/primium");
 const premiumFeaturesRoutes = require("./routes/premiumFeatures");
 const forgotpwdRoutes = require("./routes/forgot");
 const downloadRoutes = require("./routes/downloadRoutes");
-const monthdataRoutes = require("./routes/monthDataRoutes");
-const deleteRoutes = require("./routes/delete");
 
 User.hasMany(Expense);
 Expense.belongsTo(User);
@@ -51,13 +49,11 @@ Forgotpassword.belongsTo(User);
 
 app.use("/password", forgotpwdRoutes);
 app.use("/user", downloadRoutes);
-app.use(monthdataRoutes);
 app.use(primiumRoutes);
 app.use(signRoutes);
 app.use(expenseRoutes);
 app.use(IncomeRoutes);
 app.use("/premium", premiumFeaturesRoutes);
-app.use("/delete", deleteRoutes);
 
 const port = process.env.PORT;
 

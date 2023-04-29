@@ -104,8 +104,8 @@ logform.addEventListener("submit", async (e) => {
       window.location.href = "seperate.html";
     }
   } catch (err) {
-    if (err.message == "Request failed with status code 404") {
-      htextshowlog.textContent = "email is not present, signup";
+    if (err.message == "Request failed with status code 401") {
+      htextshowlog.textContent = "";
       htextshowlog.style.backgroundColor = "rgb(255,100, 70)";
       htextshowlog.style.width = "70%";
       setTimeout(() => {
