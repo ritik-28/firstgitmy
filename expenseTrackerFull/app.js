@@ -37,7 +37,6 @@ const downloadRoutes = require("./routes/downloadRoutes");
 const monthdataRoutes = require("./routes/monthDataRoutes");
 const deleteRoutes = require("./routes/delete");
 
-
 User.hasMany(Expense);
 Expense.belongsTo(User);
 
