@@ -104,12 +104,12 @@
       });
 
       async function deletelist(li, email) {
-        await axios.delete(`http://localhost:3000/deleteuser/${email}`);
+        await axios.delete(`http://54.210.206.255/deleteuser/${email}`);
         li.remove();
       }
 
       async function newList() {
-        let getUserAll = await axios.get("http://localhost:3000/getuser");
+        let getUserAll = await axios.get("http://54.210.206.255/getuser");
 
         for (let i = 0; i < getUserAll.data.length; i++) {
           const formEl = document.querySelector(".form1");
@@ -131,7 +131,7 @@
       }
 
       async function postData(objectForNetwork) {
-        await axios.post("http://localhost:3000/user", objectForNetwork);
+        await axios.post("http://54.210.206.255/user", objectForNetwork);
         newList();
         return;
       }

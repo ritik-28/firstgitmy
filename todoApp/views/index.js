@@ -12,7 +12,7 @@ btn.addEventListener("click", async (e) => {
     description: `${description.value}`,
   };
 
-  const res = await axios.post("http://localhost:3000/posttodo", todoObj);
+  const res = await axios.post("http://54.210.206.255/posttodo", todoObj);
   todoObj["id"] = res.data.id;
   genrateList(todoObj);
 });
@@ -45,18 +45,18 @@ function genrateList(todoObj) {
 
 async function donetodo(li, lidone, todoObj) {
   listdone.appendChild(lidone);
-  await axios.post("http://localhost:3000/donetodo", todoObj);
+  await axios.post("http://54.210.206.255/donetodo", todoObj);
   await deleteTodo(li, todoObj.id);
 }
 
 async function deleteTodo(li, id) {
-  await axios.delete(`http://localhost:3000/deletetodo/${id}`);
+  await axios.delete(`http://54.210.206.255/deletetodo/${id}`);
   li.parentNode.removeChild(li);
 }
 
 window.addEventListener("DOMContentLoaded", async () => {
-  const todoObj = await axios.get("http://localhost:3000/gettodo");
-  const donetodo = await axios.get("http://localhost:3000/donetodo");
+  const todoObj = await axios.get("http://54.210.206.255/gettodo");
+  const donetodo = await axios.get("http://54.210.206.255/donetodo");
   todoObj.data.forEach((element) => {
     genrateList(element);
   });

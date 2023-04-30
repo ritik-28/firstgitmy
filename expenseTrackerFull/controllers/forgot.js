@@ -33,7 +33,7 @@ const forgotPwd = async (req, res, next) => {
         sender,
         to: recievers,
         subject: `subscribe to expense app for more features`,
-        htmlContent: `<h4>visit this link</h4><a href= "http://localhost:3000/password/resetpassword/${id}">Reset Password</a>`,
+        htmlContent: `<h4>visit this link</h4><a href= "http://54.210.206.255/password/resetpassword/${id}">Reset Password</a>`,
       });
       return res.status(202).json("email sent successfully");
     } else {

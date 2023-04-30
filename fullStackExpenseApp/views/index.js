@@ -25,14 +25,14 @@ myBtn.addEventListener("click", async function (e) {
 //posting to database
 async function postResponse(expenseObj) {
   const response = await axios.post(
-    "http://localhost:3000/addexpense",
+    "http://54.210.206.255/addexpense",
     expenseObj
   );
   return response;
 }
 //getting all saved rows
 async function getAll() {
-  const getResponse = await axios.get("http://localhost:3000/getexpense");
+  const getResponse = await axios.get("http://54.210.206.255/getexpense");
   return getResponse;
 }
 //running on screen loads
@@ -44,7 +44,7 @@ window.addEventListener("DOMContentLoaded", async () => {
 });
 //deleting from databse
 async function deleteEXP(li, id) {
-  await axios.delete(`http://localhost:3000/deleteexpense/${id}`);
+  await axios.delete(`http://54.210.206.255/deleteexpense/${id}`);
   li.parentNode.removeChild(li);
 }
 //edit values and stroing to database
@@ -52,7 +52,7 @@ async function editEx(li, expenseObj) {
   expense.value = expenseObj.expense;
   description.value = expenseObj.description;
   category.value = expenseObj.category;
-  await axios.delete(`http://localhost:3000/deleteexpense/${expenseObj.id}`);
+  await axios.delete(`http://54.210.206.255/deleteexpense/${expenseObj.id}`);
   formAdd.parentNode.removeChild(li);
 }
 //generating the list
