@@ -60,56 +60,51 @@
       <div class="container-new">
         <div class="child">
           <div class="incomediv incomediv1">
-            <p class="pdiv">Total Income(Credit)</p>
+            <p class="pdiv">Income Description(Credit)</p>
           </div>
           <ul class="list-group list-todo list-group-item-success">
-            <!-- <li class="list-group-item limend">
-              Tap on '+ Income' to add new incomes
-            </li> -->
           </ul>
         </div>
 
         <div class="child">
           <div class="incomediv incomediv2">
-            <p class="pdiv">Total Expense(debit)</p>
+            <p class="pdiv">Expense Description(debit)</p>
           </div>
           <ul class="list-group list-done list-group-item-danger">
-            <!-- <li class="list-group-item limend">
-              Tap on '+ Expense' to add new Expenses
-            </li> -->
           </ul>
         </div>
       </div>
       <div class="container-new con1 hidden"></div>
-      <div class="container-new2 hidden">
-        <table class="table table-striped table-bordered caption-top tabledata">
+      <div class="container-new2  hidden">
+        <table class="table table-striped table-bordered caption-top tabledata tabledata1">
           <caption class="caption">
-            Monthly Report
+            Monthly Report(Expense)
           </caption>
           <thead class="thead">
             <tr>
               <th scope="col">Date</th>
               <th scope="col">Description</th>
               <th scope="col">Category</th>
-              <th scope="col">Income</th>
               <th scope="col">Expense</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody class="texpense">
+      <!--  -->
+          </tbody>
+        </table>
+        <table class="table table-striped table-bordered caption-top tabledata tabledata2">
+          <caption class="caption">
+            Monthly Report(Income)
+          </caption>
+          <thead class="thead">
             <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-              <td>Mark</td>
+              <th scope="col">Date</th>
+              <th scope="col">Description</th>
+              <th scope="col">Income</th>
             </tr>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-              <td>Mark</td>
-            </tr>
+          </thead>
+          <tbody class="tincome">
+       <!--  -->
           </tbody>
         </table>
       </div>
@@ -126,13 +121,7 @@
               <th scope="col">Savings</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr>
+          <tbody class="yearlyreport">
           </tbody>
         </table>
       </div>
@@ -177,7 +166,6 @@
           </select>
           <button type="submit" class="btn fbtn btn-success mb-2">✓</button>
         </form>
-        <!-- adding income from  here  -->
         <form class="form-inline col-8 formhide2">
           <input
             type="text"
@@ -234,29 +222,3 @@
     <script src="seperate.js"></script>
   </body>
 </html>
-
-<!-- <div class="container container-date">
-        
-        <div class="smalldiv">
-            <div class="datediv">
-              <p class="pdiv"></p>
-            </div>
-        </div>
-      </div>
-        <div class="container container-new con1">
-        <div class="incomediv incomediv1">
-            <p class="pdiv">  Total Income(Credit)</p>
-      </div>
-    <ul class="list-group list-todo list-group-item-success">
-      <li class="insidediv list-group-item insidediv1">Tap on '+ Income' to add new income </li>
-    </ul>
-      </div>
-      <div class="container container-new con2">
-      <div class="incomediv incomediv2">
-        <p class="pdiv">  Total Expense(debit)</p>
-  </div>
-  <li class="insidediv list-group-item insidediv2">Tap on '+ Expense' to add new Expenses</li>
-      </div>
-    </div> -->
-<!-- last dive start here -->
-<!--  -->

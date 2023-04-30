@@ -7,7 +7,6 @@ const incomePost = async (req, res, next) => {
     if (strVal(description) || strVal(amount)) {
       return res.status(400).json({ err: "fill all feilds" });
     } else {
-
       const response = await Income.create({
         description,
         amount,

@@ -17,6 +17,9 @@ const add = document.querySelector("#addbig");
 const downloadbtn = document.querySelector("#downloadbtn");
 const child1 = document.querySelector(".incomediv1");
 const child2 = document.querySelector(".incomediv2");
+const texpense = document.querySelector(".texpense");
+const tincome = document.querySelector(".tincome");
+const yearlyreport = document.querySelector(".yearlyreport");
 
 if (localStorage.getItem("pagesize") == null) {
   const pages = +prompt("how many pages do you want to see?");
@@ -24,11 +27,61 @@ if (localStorage.getItem("pagesize") == null) {
 }
 
 monthly.addEventListener("click", async () => {
+  texpense.innerHTML = "";
+  tincome.innerHTML = "";
   container2.style.display = "none";
   containertableyearly.style.display = "none";
   newbtn1.style.display = "none";
   newbtn2.style.display = "none";
+  con1.style.display = "none";
+  const month = new Date();
+  const date = `${month.getFullYear()}-${month.getMonth() + 1}-${1}`;
+
+  const monthlyDetails = await axios.get(
+    `http://localhost:3000/monthdata?month=${date}`,
+    {
+      headers: { authorization: `${localStorage.getItem("token")}` },
+    }
+  );
+
+  const { dataexpense, dataIncome } = monthlyDetails.data;
+  let totalIncome = 0;
+  let totalExpense = 0;
   containertabledata.style.display = "block";
+  dataexpense.forEach((el) => {
+    const date = el.createdAt.split("T");
+    const expenseT = `<tr>
+    <th scope="row">${date[0]}</th>
+    <td>${el.description}</td>
+    <td>${el.category}</td>
+    <td>${el.amount}</td>
+  </tr>`;
+    totalExpense = totalExpense + el.amount;
+    texpense.insertAdjacentHTML("beforeend", expenseT);
+  });
+  dataIncome.forEach((el) => {
+    const date = el.createdAt.split("T");
+    const incomeT = `<tr>
+    <th scope="row">${date[0]}</th>
+    <td>${el.description}</td>
+    <td>${el.amount}</td>
+    </tr>`;
+    totalIncome = totalIncome + el.amount;
+    tincome.insertAdjacentHTML("beforeend", incomeT);
+  });
+  const totel = `</br><h1 style="color:green;font-size :20px; margin-left:30px">Total Income = ₹${totalIncome}</h1><h1 style="color:red;font-size :20px; margin-left:30px">Total Expense = ₹${totalExpense}</h1> `;
+  containertabledata.insertAdjacentHTML("beforeend", totel);
+
+  let savings, debt;
+  if (totalIncome - totalExpense > 0) {
+    savings = totalIncome - totalExpense;
+    debt = 0;
+  } else if (totalIncome - totalExpense < 0) {
+    savings = 0;
+    debt = totalExpense - totalIncome;
+  }
+  const save = `<h1 style="color:green;font-size :20px; margin-left:30px">Savings this month = ₹${savings}</h1><h1 style="color:red;font-size :20px; margin-left:30px">Debt this month = ₹${debt}</h1>`;
+  containertabledata.insertAdjacentHTML("beforeend", save);
 });
 
 yearly.addEventListener("click", async () => {
@@ -36,15 +89,79 @@ yearly.addEventListener("click", async () => {
   containertabledata.style.display = "none";
   newbtn1.style.display = "none";
   newbtn2.style.display = "none";
+  con1.style.display = "none";
+  tincome.innerHTML = "";
+  texpense.innerHTML = "";
+  const monthtemp = new Date();
+  const date = `${monthtemp.getFullYear()}-1-1`;
+  const yearlyDetails = await axios.get(
+    `http://localhost:3000/yeardata?year=${date}`,
+    {
+      headers: { authorization: `${localStorage.getItem("token")}` },
+    }
+  );
+
+  const { dataexpense, dataIncome } = yearlyDetails.data;
+  const monthdataobjexpense = {};
+  const monthdataobjincome = {};
+  for (let i = 0; i < dataexpense.length; i++) {
+    let month1 = dataexpense[i].createdAt.split("T")[0].split("-")[1];
+    let month = getMonthNameDateString(month1 - 1);
+    if (monthdataobjexpense[`${month}`]) {
+      monthdataobjexpense[`${month}`] =
+        monthdataobjexpense[`${month}`] + dataexpense[i].amount;
+    } else {
+      monthdataobjexpense[`${month}`] = dataexpense[i].amount;
+    }
+  }
+  let month;
+  for (let i = 0; i < dataIncome.length; i++) {
+    let month1 = dataIncome[i].createdAt.split("T")[0].split("-")[1];
+    month = getMonthNameDateString(month1 - 1);
+    if (monthdataobjincome[`${month}`]) {
+      monthdataobjincome[`${month}`] =
+        monthdataobjincome[`${month}`] + dataIncome[i].amount;
+    } else {
+      monthdataobjincome[`${month}`] = dataIncome[i].amount;
+    }
+  }
+  var savings = monthdataobjincome.April - monthdataobjexpense.April;
+  const data = `<tr>
+  <th scope="row">${month}</th>
+  <td>${monthdataobjincome.April}</td>
+  <td>${monthdataobjexpense.April}</td>
+  <td>${savings}</td>
+</tr>`;
   containertableyearly.style.display = "block";
+  yearlyreport.innerHTML = data;
 });
+function getMonthNameDateString(dt) {
+  monthNamelist = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  return monthNamelist[dt];
+}
 
 add.addEventListener("click", async () => {
   containertabledata.style.display = "none";
   containertableyearly.style.display = "none";
+  con1.style.display = "none";
   newbtn1.style.display = "block";
   newbtn2.style.display = "block";
   container2.style.display = "block";
+  tincome.innerHTML = "";
+  texpense.innerHTML = "";
 });
 
 formhide2.addEventListener("submit", async (e) => {
@@ -55,12 +172,12 @@ formhide2.addEventListener("submit", async (e) => {
       amount: `${e.target.f2.value}`,
     };
     const postRes = await postIN(obj);
-    if (postRes.data == "new income has been created in table") {
+    if (postRes.data.msg == "new income has been created in table") {
       formhide2.style.display = "none";
       newbtn1.style.display = "block";
       newbtn2.style.display = "block";
       const income = `${e.target.f1.value} \u00A0 \u00A0 \u00A0 \u00A0 ₹ ${e.target.f2.value} `;
-      const li = makeLi(income);
+      const li = makeLi(income, postRes.data.id, income);
       listodo.insertAdjacentElement("afterbegin", li);
     }
   } catch (err) {
@@ -91,12 +208,12 @@ formhide.addEventListener("submit", async (e) => {
       category: `${e.target.exc.value}`,
     };
     const postRes = await postEX(obj);
-    if (postRes.data == "new expense created in table") {
+    if (postRes.data.msg == "new expense created in table") {
       formhide.style.display = "none";
       newbtn1.style.display = "block";
       newbtn2.style.display = "block";
       const income = `${e.target.exd.value}\u00A0 \u00A0 ₹ ${e.target.exa.value}\u00A0 \u00A0 ${e.target.exc.value}`;
-      const li = makeLi(income);
+      const li = makeLi(income, postRes.data.id, "expense");
       listdone.insertAdjacentElement("afterbegin", li);
     }
   } catch (err) {
@@ -148,10 +265,11 @@ function createButton(list, totalExPages, exorin) {
         let income;
         if (exorin == "expenses") {
           income = `${element.description}\u00A0 \u00A0 \u00A0 \u00A0 ₹ ${element.amount}\u00A0 \u00A0 \u00A0 \u00A0${element.category}`;
+          exorin = "expense";
         } else {
           income = `${element.description}\u00A0 \u00A0 \u00A0 \u00A0 ₹ ${element.amount}`;
         }
-        const li = makeLi(income);
+        const li = makeLi(income, element.id, exorin);
         list.insertAdjacentText("afterbegin", "");
         list.appendChild(li);
         list.insertAdjacentElement("beforeend", div);
@@ -169,7 +287,7 @@ window.addEventListener("DOMContentLoaded", async () => {
   const totalExPages = Math.ceil(getRes.data.totalExpense / 10);
   getRes.data.arr.forEach((element) => {
     const income = `${element.description}\u00A0 \u00A0 \u00A0 \u00A0 ₹ ${element.amount}\u00A0 \u00A0 \u00A0 \u00A0${element.category}`;
-    const li = makeLi(income);
+    const li = makeLi(income, element.id, "expense");
     listdone.appendChild(li);
   });
   createButton(listdone, totalExPages, "expenses");
@@ -180,7 +298,7 @@ window.addEventListener("DOMContentLoaded", async () => {
   let totalinPages = Math.ceil(getIn.data.totalIncome / 10);
   getIn.data.arr.forEach((el) => {
     const income = `${el.description}\u00A0 \u00A0 \u00A0 \u00A0 ₹ ${el.amount}`;
-    const li = makeLi(income);
+    const li = makeLi(income, el.id, "income");
     listodo.appendChild(li);
   });
 
@@ -260,6 +378,7 @@ rzpButton.addEventListener("click", async (req, res, next) => {
 });
 
 leaderboard.addEventListener("click", async (e) => {
+  con1.innerHTML = "";
   const leader = await axios.get(
     "http://localhost:3000/premium/showleaderboard",
     {
@@ -268,6 +387,8 @@ leaderboard.addEventListener("click", async (e) => {
   );
   containertabledata.style.display = "none";
   containertableyearly.style.display = "none";
+  tincome.innerHTML = "";
+  texpense.innerHTML = "";
   container2.style.display = "none";
   con1.style.display = "block";
   con1.style.overflowY = "scroll";
@@ -289,7 +410,7 @@ leaderboard.addEventListener("click", async (e) => {
   });
 });
 
-function makeLi(income) {
+function makeLi(income, id, exorin) {
   const li = document.createElement("li");
   li.className = "list-group-item";
   li.style.whiteSpace = "preline";
@@ -301,6 +422,16 @@ function makeLi(income) {
   buttondel.style.width = "4%";
   buttondel.style.float = "right";
   buttondel.append(document.createTextNode("x"));
+
+  buttondel.addEventListener("click", async () => {
+    const response = await axios.delete(
+      `http://localhost:3000/delete/${exorin}/${id}`,
+      {
+        headers: { authorization: `${localStorage.getItem("token")}` },
+      }
+    );
+    li.remove();
+  });
 
   li.appendChild(document.createTextNode(income));
   li.appendChild(buttondel);
