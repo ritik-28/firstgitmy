@@ -33,7 +33,7 @@ const forgotPwd = async (req, res, next) => {
         sender,
         to: recievers,
         subject: `subscribe to expense app for more features`,
-        htmlContent: `<h4>visit this link</h4><a href= "http://54.210.206.255/password/resetpassword/${id}">Reset Password</a>`,
+        htmlContent: `<h4>visit this link</h4><a href= "http://54.210.206.255:3000/password/resetpassword/${id}">Reset Password</a>`,
       });
       return res.status(202).json("email sent successfully");
     } else {
@@ -52,7 +52,7 @@ const resetPwd = async (req, res, next) => {
     if (gotit) {
       gotit.update({ isactive: false });
       res.status(200).send(`<html>
-                                <form action="/password/updatepassword/${id}" method="get">
+                                <form action="http://54.210.206.255:3000/password/updatepassword/${id}" method="get">
                                         <label for="newpassword">Enter New password</label>
                                         <input name="newpassword" type="password" required></input>
                                         <button>reset password</button>
