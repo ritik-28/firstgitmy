@@ -1,7 +1,6 @@
 const user = document.querySelector("#username");
 const email = document.querySelector("#email");
 const password = document.querySelector("#password");
-const signup = document.querySelector("#submitbtn");
 const regform = document.querySelector(".formjs");
 const htext = document.querySelector(".textshow");
 const logdirect = document.querySelector(".logdirect");
@@ -25,7 +24,7 @@ forgotPwd.addEventListener("submit", async (e) => {
     e.preventDefault();
     const postobj = { email: e.target.emailpwd.value };
     const res = await axios.post(
-      "http://54.210.206.255/password/forgotpassword",
+      "http://54.210.206.255:3000/password/forgotpassword",
       postobj
     );
     if (res.status === 202) {
@@ -51,7 +50,7 @@ regform.addEventListener("submit", async (e) => {
   password.value = "";
 
   try {
-    const data = await axios.post("http://54.210.206.255/signup", postObj);
+    const data = await axios.post("http://54.210.206.255:3000/signup", postObj);
   } catch (err) {
     if (err.message == "Request failed with status code 403") {
       htext.textContent = "user already exist";
@@ -98,7 +97,10 @@ logform.addEventListener("submit", async (e) => {
     emaillog.value = "";
     passwordlog.value = "";
 
-    const yes = await axios.post("http://54.210.206.255/login", postObjlog);
+    const yes = await axios.post(
+      "http://54.210.206.255:3000/login",
+      postObjlog
+    );
     if (yes.data != "") {
       localStorage.setItem("token", yes.data);
       window.location.href = "seperate.html";

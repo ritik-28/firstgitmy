@@ -38,7 +38,7 @@ monthly.addEventListener("click", async () => {
   const date = `${month.getFullYear()}-${month.getMonth() + 1}-${1}`;
 
   const monthlyDetails = await axios.get(
-    `http://54.210.206.255/monthdata?month=${date}`,
+    `http://54.210.206.255:3000/monthdata?month=${date}`,
     {
       headers: { authorization: `${localStorage.getItem("token")}` },
     }
@@ -95,7 +95,7 @@ yearly.addEventListener("click", async () => {
   const monthtemp = new Date();
   const date = `${monthtemp.getFullYear()}-1-1`;
   const yearlyDetails = await axios.get(
-    `http://54.210.206.255/yeardata?year=${date}`,
+    `http://54.210.206.255:3000/yeardata?year=${date}`,
     {
       headers: { authorization: `${localStorage.getItem("token")}` },
     }
@@ -177,7 +177,7 @@ formhide2.addEventListener("submit", async (e) => {
       newbtn1.style.display = "block";
       newbtn2.style.display = "block";
       const income = `${e.target.f1.value} \u00A0 \u00A0 \u00A0 \u00A0 ₹ ${e.target.f2.value} `;
-      const li = makeLi(income, postRes.data.id, income);
+      const li = makeLi(income, postRes.data.id, "income");
       listodo.insertAdjacentElement("afterbegin", li);
     }
   } catch (err) {
@@ -186,14 +186,14 @@ formhide2.addEventListener("submit", async (e) => {
 });
 
 async function postIN(obj) {
-  const postRes = await axios.post("http://54.210.206.255/income", obj, {
+  const postRes = await axios.post("http://54.210.206.255:3000/income", obj, {
     headers: { authorization: `${localStorage.getItem("token")}` },
   });
   return postRes;
 }
 
 async function postEX(obj) {
-  const postRes = await axios.post("http://54.210.206.255/expenses", obj, {
+  const postRes = await axios.post("http://54.210.206.255:3000/expenses", obj, {
     headers: { authorization: `${localStorage.getItem("token")}` },
   });
   return postRes;
@@ -208,7 +208,6 @@ formhide.addEventListener("submit", async (e) => {
       category: `${e.target.exc.value}`,
     };
     const postRes = await postEX(obj);
-    console.log(postRes);
     if (postRes.data.msg == "new expense created in table") {
       formhide.style.display = "none";
       newbtn1.style.display = "block";
@@ -256,7 +255,7 @@ function createButton(list, totalExPages, exorin) {
 
     btn.addEventListener("click", async () => {
       const expense = await axios.get(
-        `http://54.210.206.255/${exorin}?page=${i + 1}`,
+        `http://54.210.206.255:3000/${exorin}?page=${i + 1}`,
         {
           headers: { authorization: `${localStorage.getItem("token")}` },
         }
@@ -270,7 +269,6 @@ function createButton(list, totalExPages, exorin) {
         } else {
           income = `${element.description}\u00A0 \u00A0 \u00A0 \u00A0 ₹ ${element.amount}`;
         }
-
         const li = makeLi(income, element.id, exorin);
         list.insertAdjacentText("afterbegin", "");
         list.appendChild(li);
@@ -283,7 +281,7 @@ function createButton(list, totalExPages, exorin) {
 
 window.addEventListener("DOMContentLoaded", async () => {
   const nopage = localStorage.getItem("pagesize");
-  const getRes = await axios.get(`http://54.210.206.255/expenses`, {
+  const getRes = await axios.get(`http://54.210.206.255:3000/expenses`, {
     headers: { authorization: `${localStorage.getItem("token")}` },
   });
   const totalExPages = Math.ceil(getRes.data.totalExpense / 10);
@@ -294,13 +292,12 @@ window.addEventListener("DOMContentLoaded", async () => {
   });
   createButton(listdone, totalExPages, "expenses");
   const isPremium = getRes.data.isPremium;
-  const getIn = await axios.get(`http://54.210.206.255/income`, {
+  const getIn = await axios.get(`http://54.210.206.255:3000/income`, {
     headers: { authorization: `${localStorage.getItem("token")}` },
   });
   let totalinPages = Math.ceil(getIn.data.totalIncome / 10);
   getIn.data.arr.forEach((el) => {
     const income = `${el.description}\u00A0 \u00A0 \u00A0 \u00A0 ₹ ${el.amount}`;
-
     const li = makeLi(income, el.id, "income");
     listodo.appendChild(li);
   });
@@ -324,9 +321,12 @@ function primium() {
 
 downloadbtn.addEventListener("click", async () => {
   try {
-    const response = await axios.get("http://54.210.206.255/user/download", {
-      headers: { authorization: `${localStorage.getItem("token")}` },
-    });
+    const response = await axios.get(
+      "http://54.210.206.255:3000/user/download",
+      {
+        headers: { authorization: `${localStorage.getItem("token")}` },
+      }
+    );
     if (response.status === 201) {
       // backend is sending download link which if we open in browser, the file would download
       var a = document.createElement("a");
@@ -343,16 +343,19 @@ downloadbtn.addEventListener("click", async () => {
 
 rzpButton.addEventListener("click", async (req, res, next) => {
   const token = localStorage.getItem("token");
-  const response = await axios.get("http://54.210.206.255/primiummembership", {
-    headers: { authorization: token },
-  });
+  const response = await axios.get(
+    "http://54.210.206.255:3000/primiummembership",
+    {
+      headers: { authorization: token },
+    }
+  );
 
   var options = {
     key: response.data.key_id,
     order_id: response.data.order.id,
     handler: async function (response) {
       await axios.post(
-        "http://54.210.206.255/updatetransactionstatus",
+        "http://54.210.206.255:3000/updatetransactionstatus",
         {
           order_id: options.order_id,
           payment_id: response.razorpay_payment_id,
@@ -371,7 +374,7 @@ rzpButton.addEventListener("click", async (req, res, next) => {
   rzp1.on("payment.failed", async function (response) {
     alert("Transaction Failed");
     await axios.post(
-      "http://54.210.206.255/failedpayment",
+      "http://54.210.206.255:3000/failedpayment",
       { order_id: options.order_id },
       {
         headers: { authorization: token },
@@ -383,7 +386,7 @@ rzpButton.addEventListener("click", async (req, res, next) => {
 leaderboard.addEventListener("click", async (e) => {
   con1.innerHTML = "";
   const leader = await axios.get(
-    "http://54.210.206.255/premium/showleaderboard",
+    "http://54.210.206.255:3000/premium/showleaderboard",
     {
       headers: { authorization: `${localStorage.getItem("token")}` },
     }
@@ -428,7 +431,7 @@ function makeLi(income, id, exorin) {
 
   buttondel.addEventListener("click", async () => {
     const response = await axios.delete(
-      `http://54.210.206.255/delete/${exorin}/${id}`,
+      `http://54.210.206.255:3000/delete/${exorin}/${id}`,
       {
         headers: { authorization: `${localStorage.getItem("token")}` },
       }
@@ -440,3 +443,9 @@ function makeLi(income, id, exorin) {
   li.appendChild(buttondel);
   return li;
 }
+
+// //date initializer
+// const date = new Date();
+// var dateday = date.toDateString("default", { day: "long" });
+// const ht = `${dateday}`;
+// pdiv.appendChild(document.createTextNode(ht));
